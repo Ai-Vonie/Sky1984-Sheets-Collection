@@ -56,7 +56,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VT_RESULTS: ${{ steps.vt_scan.outputs.analysis }}
         run: |
-          echo "### 🛡️ VirusTotal Analysis GitHub Action analysis:" > vt_report.md
+          echo "### 🛡️ VirusTotal GitHub Action analysis:" > vt_report.md
           echo "" >> vt_report.md
           echo "$VT_RESULTS" | tr ',' '\n' | sed 's/^\([^=]*\)=\(.*\)/- [\1](\2)/' >> vt_report.md
 
