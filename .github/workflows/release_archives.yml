@@ -1,0 +1,69 @@
+name: Release Archives
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install 7-Zip
+        run: sudo apt-get update && sudo apt-get install -y p7zip-full
+
+      - name: Archive Folders
+        run: |
+          CURRENT_DATE=$(date +%Y-%m-%d)
+
+          FILE_FULL="Sky1984-Sheets-Collection-[${CURRENT_DATE}].7z"
+          FILE_MULTI_SHEET="Sky1984-Collection-Multi_Sheet_Songs-[${CURRENT_DATE}].7z"
+          FILE_SONGS="Sky1984-Collection-Songs-[${CURRENT_DATE}].7z"
+
+          PPMD_PARAMS="-t7z -m0=PPMd:mem=96m:o=8 -ms=512m"
+
+          7z a $PPMD_PARAMS "$FILE_FULL" . -xr!.git -xr!.github
+          7z a $PPMD_PARAMS "$FILE_MULTI_SHEET" "Multi-Sheet Songs"
+          7z a $PPMD_PARAMS "$FILE_SONGS" "Songs"
+
+      - name: Create Release
+        uses: softprops/action-gh-release@v1
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          files: |
+            *.7z
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: VirusTotal Scan
+        id: vt_scan
+        uses: crazy-max/ghaction-virustotal@v4.2.0
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          vt_api_key: ${{ secrets.VT_API_KEY }}
+          files: |
+            *.7z
+
+      - name: Update Release Body
+        if: startsWith(github.ref, 'refs/tags/')
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          VT_RESULTS: ${{ steps.vt_scan.outputs.analysis }}
+        run: |
+          echo "### 🛡️ VirusTotal Analysis GitHub Action analysis:" > vt_report.md
+          echo "" >> vt_report.md
+          echo "$VT_RESULTS" | tr ',' '\n' | sed 's/^\([^=]*\)=\(.*\)/- [\1](\2)/' >> vt_report.md
+
+          gh release view ${{ github.ref_name }} --json body --jq .body > current_body.md
+
+          cat current_body.md > new_body.md
+          echo -e "\n\n" >> new_body.md
+          cat vt_report.md >> new_body.md
+
+          gh release edit ${{ github.ref_name }} --notes-file new_body.md

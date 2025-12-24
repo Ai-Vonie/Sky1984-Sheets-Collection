@@ -1,4 +1,4 @@
-# Sky1984 Sheets Collection
+# [Sky1984 Sheets Collection](https://api.github.com/repos/Ai-Vonie/Sky1984-Sheets-Collection/releases)
 🌍 Read in: **English** *∙ [Русский](README_ru.md)*
 
 **Sky1984 Sheets Collection** is an extensive library of music sheets collected to simplify the search for specific compositions in one place. These sheets are designed for playing on in-game instruments in **Sky: Children of the Light** and for use on the *[Sky Music Nightly](https://sky-music-nightly.pages.dev/)* site.
@@ -43,6 +43,8 @@ To get a full local copy of the library:
 1.  Go to the main repository page.
 2.  Click the green **`<> Code`** button.
 3.  Select [**`Download ZIP`**](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/archive/refs/heads/master.zip) from the dropdown menu.
+
+Can also download a specific folder or the entire repository from the [**Releases**](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/releases) tab.
 
 # 💭 Why?
 
