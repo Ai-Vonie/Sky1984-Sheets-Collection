@@ -60,4 +60,5 @@ A custom algorithm was used for filtering with the following logic:
 2.  **Structural Duplicates:** Analysis of JSON metadata content.
 3.  **Fuzzy Matching:** Comparison of note sequences within the same BPM group to identify similar arrangements (with a similarity threshold of ~80%).
 
+> [!NOTE]
 > **Note:** Some files were allowed into the repository if song variations were encountered (*Easy/Hard*, *V1/V2*, and other possible options).

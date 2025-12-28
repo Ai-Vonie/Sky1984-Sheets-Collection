@@ -5,6 +5,13 @@ on:
     tags:
       - 'v*'
 
+env:
+  # TRUE = Download SFX module from mcmilk/7-Zip-zstd
+  # FALSE = Download Windows 7-Zip
+  USE_MODDED_SFX: true
+  SEVENZIP_ZSTD: "Installer_7z-zstd-x64"
+  SEVENZIP_EXE: "7z2501-x64.exe"
+
 jobs:
   build-and-release:
     runs-on: ubuntu-latest
@@ -12,34 +19,100 @@ jobs:
       contents: write
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v6.0.1
+        with:
+          fetch-depth: 0
 
-      - name: Install 7-Zip
-        run: sudo apt-get update && sudo apt-get install -y p7zip-full
+      - name: Calculate Statistics
+        id: stats
+        run: |
+          git config --global --add safe.directory '*'
+          git fetch --tags --force
+
+          CURRENT_TAG="${{ github.ref_name }}"
+          REPO="${{ github.repository }}"
+
+          PREV_TAG=$(git tag --sort=-creatordate | grep -v "^$CURRENT_TAG$" | head -n 1)
+          if [ -z "$PREV_TAG" ]; then PREV_TAG="NONE"; fi
+
+          echo "Current Tag: $CURRENT_TAG"
+          echo "Previous Tag found: $PREV_TAG"
+
+          DIR_MULTI="Multi-Sheet Songs"
+          DIR_SONGS="Songs"
+
+          TOTAL_MULTI=$(find "$DIR_MULTI" -type f -not -name ".gitkeep" -not -name ".keep" 2>/dev/null | wc -l)
+          TOTAL_SONGS=$(find "$DIR_SONGS" -type f -not -name ".gitkeep" -not -name ".keep" 2>/dev/null | wc -l)
+
+          if [ "$PREV_TAG" == "NONE" ]; then
+            UPDATED_MULTI="First Release"
+            UPDATED_SONGS="First Release"
+            COMPARE_MD="First Release"
+          else
+            UPDATED_MULTI=$(git diff --name-only "$PREV_TAG" HEAD -- "$DIR_MULTI" | wc -l)
+            UPDATED_SONGS=$(git diff --name-only "$PREV_TAG" HEAD -- "$DIR_SONGS" | wc -l)
+
+            COMPARE_URL="https://github.com/$REPO/compare/$PREV_TAG...$CURRENT_TAG"
+            COMPARE_MD="[🔄 **View Full Changelog** ($PREV_TAG ... $CURRENT_TAG)]($COMPARE_URL)"
+          fi
+
+          echo "Multi-Sheet: Total=$TOTAL_MULTI, Updated=$UPDATED_MULTI"
+          echo "Songs: Total=$TOTAL_SONGS, Updated=$UPDATED_SONGS"
+
+          echo "STATS_TOTAL_MULTI=$TOTAL_MULTI" >> $GITHUB_ENV
+          echo "STATS_TOTAL_SONGS=$TOTAL_SONGS" >> $GITHUB_ENV
+          echo "STATS_UPDATED_MULTI=$UPDATED_MULTI" >> $GITHUB_ENV
+          echo "STATS_UPDATED_SONGS=$UPDATED_SONGS" >> $GITHUB_ENV
+          echo "PREV_TAG_NAME=$PREV_TAG" >> $GITHUB_ENV
+          echo "COMPARE_LINK_MD=$COMPARE_MD" >> $GITHUB_ENV
+
+      - name: Install 7-Zip & Utils
+        run: sudo apt-get update && sudo apt-get install -y p7zip-full wget jq curl
+
+      - name: Download Windows SFX Module
+        run: |
+          if [ "${{ env.USE_MODDED_SFX }}" == "true" ]; then
+            echo "🔹 Mode: Downloading Modded SFX (mcmilk)"
+
+            RESPONSE=$(curl -sL https://api.github.com/repos/mcmilk/7-Zip-zstd/releases/latest)
+            DOWNLOAD_URL=$(echo "$RESPONSE" | jq -r '.assets[] | select(.name | test("^7z.*-x64\\.exe$")) | .browser_download_url')
+            if [ -z "$DOWNLOAD_URL" ] || [ "$DOWNLOAD_URL" == "null" ]; then
+              echo "Failed to find installer EXE in release assets."
+              echo "Response content: $RESPONSE"
+              exit 1
+            fi
+
+            echo "Found ${{ env.SEVENZIP_ZSTD }} URL: $DOWNLOAD_URL"
+            wget -O ${{ env.SEVENZIP_ZSTD }}.exe "$DOWNLOAD_URL"
+            7z e ${{ env.SEVENZIP_ZSTD }}.exe 7z.sfx -r
+          else
+            echo "🔸 Mode: Downloading Windows 7-Zip SFX"
+
+            wget "https://www.7-zip.org/a/${{ env.SEVENZIP_EXE }}"
+            7z e "${{ env.SEVENZIP_EXE }}" 7z.sfx
+          fi
 
       - name: Archive Folders
         run: |
           CURRENT_DATE=$(date +%Y-%m-%d)
 
-          FILE_FULL="Sky1984-Sheets-Collection-[${CURRENT_DATE}].7z"
-          FILE_MULTI_SHEET="Sky1984-Collection-Multi_Sheet_Songs-[${CURRENT_DATE}].7z"
-          FILE_SONGS="Sky1984-Collection-Songs-[${CURRENT_DATE}].7z"
+          FILE_FULL="Sky1984-Sheets-Collection-${CURRENT_DATE}"
+          FILE_MULTI_SHEET="Sky1984-Collection-Multi_Sheet_Songs-${CURRENT_DATE}.7z"
+          FILE_SONGS="Sky1984-Collection-Songs-${CURRENT_DATE}.7z"
 
-          PPMD_PARAMS="-t7z -m0=PPMd:mem=96m:o=8 -ms=512m"
+          # LZMA2_PARAMS="-m0=lzma2:d=64m:fb=128 -ms=512m -mmt=on -bb0 -bsp0"
+          PPMD_PARAMS="-m0=PPMd:mem=96m:o=8 -ms=512m -mmt=on -bb0 -bsp0"
 
-          7z a $PPMD_PARAMS "$FILE_FULL" . -xr!.git -xr!.github
-          7z a $PPMD_PARAMS "$FILE_MULTI_SHEET" "Multi-Sheet Songs"
-          7z a $PPMD_PARAMS "$FILE_SONGS" "Songs"
+          7z a $PPMD_PARAMS -sfx./7z.sfx "${FILE_FULL}_x64.exe" . -xr!.git -xr!.github -xr!*.7z -xr!*.exe -xr!*.sfx
 
-      - name: Create Release
-        uses: softprops/action-gh-release@v1
-        if: startsWith(github.ref, 'refs/tags/')
-        with:
-          files: |
-            *.7z
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          7z a $PPMD_PARAMS -t7z "$FILE_FULL.7z" . -xr!.git -xr!.github -xr!*.7z -xr!*.exe -xr!*.sfx
+          7z a $PPMD_PARAMS -t7z "$FILE_MULTI_SHEET" "Multi-Sheet Songs"
+          7z a $PPMD_PARAMS -t7z "$FILE_SONGS" "Songs"
+
+          rm -f 7z.sfx
+          rm -f "${{ env.SEVENZIP_ZSTD }}.exe"
+          rm -f "${{ env.SEVENZIP_EXE }}"
 
       - name: VirusTotal Scan
         id: vt_scan
@@ -47,23 +120,54 @@ jobs:
         if: startsWith(github.ref, 'refs/tags/')
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
+          github_token: ${{ secrets.STUB_TOKEN || secrets.GITHUB_TOKEN }}
           files: |
-            *.7z
+            Sky1984*.exe
+            Sky1984*.7z
 
-      - name: Update Release Body
+      - name: Generate Release Body
+        id: gen_body
         if: startsWith(github.ref, 'refs/tags/')
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           VT_RESULTS: ${{ steps.vt_scan.outputs.analysis }}
         run: |
-          echo "### 🛡️ VirusTotal GitHub Action analysis:" > vt_report.md
-          echo "" >> vt_report.md
-          echo "$VT_RESULTS" | tr ',' '\n' | sed 's/^\([^=]*\)=\(.*\)/- [\1](\2)/' >> vt_report.md
+          TAG_RAW=${{ github.ref_name }}
+          TAG_CLEAN=${TAG_RAW#v}
+          TAG_FORMATTED=${TAG_CLEAN/-/ - }
+          RELEASE_TITLE="Sky1984 Sheets Collection Release - ${TAG_FORMATTED}"
+          echo "RELEASE_TITLE=$RELEASE_TITLE" >> $GITHUB_ENV
 
-          gh release view ${{ github.ref_name }} --json body --jq .body > current_body.md
+          echo "$RELEASE_TITLE" > release_body.md
+          echo "" >> release_body.md
 
-          cat current_body.md > new_body.md
-          echo -e "\n\n" >> new_body.md
-          cat vt_report.md >> new_body.md
+          echo "### 📊 Statistics" >> release_body.md
+          echo "${{ env.COMPARE_LINK_MD }}" >> release_body.md
+          echo "" >> release_body.md
+          echo "| Category | Total Files | Updated Files (vs ${{ env.PREV_TAG_NAME }}) |" >> release_body.md
+          echo "| :--- | :---: | :---: |" >> release_body.md
+          echo "| **Multi-Sheet Songs** | ${{ env.STATS_TOTAL_MULTI }} | ${{ env.STATS_UPDATED_MULTI }} |" >> release_body.md
+          echo "| **Songs** | ${{ env.STATS_TOTAL_SONGS }} | ${{ env.STATS_UPDATED_SONGS }} |" >> release_body.md
+          echo "" >> release_body.md
 
-          gh release edit ${{ github.ref_name }} --notes-file new_body.md
+          echo "<details>" >> release_body.md
+          echo "<summary>### 🛡️ VirusTotal GitHub Action analysis:</summary>" >> release_body.md
+          echo "" >> release_body.md
+          echo "$VT_RESULTS" | tr ',' '\n' | sed 's/^\([^=]*\)=\(.*\)/- [\1](\2)/' >> release_body.md
+          echo "" >> release_body.md
+          echo "</details>" >> release_body.md
+
+          echo "Generated Release Content:"
+          cat release_body.md
+
+      - name: GH Release
+        uses: softprops/action-gh-release@v2.5.0
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          name: ${{ env.RELEASE_TITLE }}
+          files: |
+            Sky1984*.exe
+            Sky1984*.7z
+          body_path: release_body.md
+          fail_on_unmatched_files: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
