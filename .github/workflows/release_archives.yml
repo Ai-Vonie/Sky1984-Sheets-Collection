@@ -65,6 +65,7 @@ jobs:
           echo "STATS_UPDATED_MULTI=$UPDATED_MULTI" >> $GITHUB_ENV
           echo "STATS_UPDATED_SONGS=$UPDATED_SONGS" >> $GITHUB_ENV
           echo "PREV_TAG_NAME=$PREV_TAG" >> $GITHUB_ENV
+          echo "CURRENT_TAG_NAME=$CURRENT_TAG" >> $GITHUB_ENV
           echo "COMPARE_LINK_MD=$COMPARE_MD" >> $GITHUB_ENV
 
       - name: Install 7-Zip & Utils
@@ -137,20 +138,28 @@ jobs:
           RELEASE_TITLE="Sky1984 Sheets Collection Release - ${TAG_FORMATTED}"
           echo "RELEASE_TITLE=$RELEASE_TITLE" >> $GITHUB_ENV
 
+          REPO_URL="https://github.com/${{ github.repository }}"
+          LINK_CURRENT="[${{ env.CURRENT_TAG_NAME }}]($REPO_URL/tree/${{ env.CURRENT_TAG_NAME }})"
+          if [ "${{ env.PREV_TAG_NAME }}" == "NONE" ]; then
+            LINK_PREV="NONE"
+          else
+            LINK_PREV="[${{ env.PREV_TAG_NAME }}]($REPO_URL/tree/${{ env.PREV_TAG_NAME }})"
+          fi
+
           echo "$RELEASE_TITLE" > release_body.md
           echo "" >> release_body.md
 
           echo "### 📊 Statistics" >> release_body.md
           echo "${{ env.COMPARE_LINK_MD }}" >> release_body.md
           echo "" >> release_body.md
-          echo "| Category | Total Files | Updated Files (vs ${{ env.PREV_TAG_NAME }}) |" >> release_body.md
+          echo "| Category | Total Files | $LINK_CURRENT vs $LINK_PREV |" >> release_body.md
           echo "| :--- | :---: | :---: |" >> release_body.md
           echo "| **Multi-Sheet Songs** | ${{ env.STATS_TOTAL_MULTI }} | ${{ env.STATS_UPDATED_MULTI }} |" >> release_body.md
           echo "| **Songs** | ${{ env.STATS_TOTAL_SONGS }} | ${{ env.STATS_UPDATED_SONGS }} |" >> release_body.md
           echo "" >> release_body.md
 
           echo "<details>" >> release_body.md
-          echo "<summary>### 🛡️ VirusTotal GitHub Action analysis:</summary>" >> release_body.md
+          echo "<summary>🛡️ VirusTotal GitHub Action analysis:</summary>" >> release_body.md
           echo "" >> release_body.md
           echo "$VT_RESULTS" | tr ',' '\n' | sed 's/^\([^=]*\)=\(.*\)/- [\1](\2)/' >> release_body.md
           echo "" >> release_body.md
