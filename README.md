@@ -58,7 +58,8 @@ Initially, ±59,457 files were collected. The final collection is the result whe
 A custom algorithm was used for filtering with the following logic:
 1.  **Exact Duplicates:** Comparison by SHA-256 file hash.
 2.  **Structural Duplicates:** Analysis of JSON metadata content.
-3.  **Fuzzy Matching:** Comparison of note sequences within the same BPM group to identify similar arrangements (with a similarity threshold of ~80%).
+3.  **Layer Variants:** Comparison of note signatures to identify different key variations of the same chart.
+4.  **Fuzzy Matching:** Comparison of note sequences within the same BPM group to identify similar arrangements (with a similarity threshold of ~80%).
 
 > [!NOTE]
 > **Note:** Some files were allowed into the repository if song variations were encountered (*Easy/Hard*, *V1/V2*, and other possible options).

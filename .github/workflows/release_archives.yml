@@ -17,6 +17,9 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: write
+      id-token: write
+      attestations: write
+      artifact-metadata: write
 
     steps:
       - name: Checkout
@@ -28,6 +31,7 @@ jobs:
         id: stats
         run: |
           git config --global --add safe.directory '*'
+          git config --global core.quotePath false
           git fetch --tags --force
 
           CURRENT_TAG="${{ github.ref_name }}"
@@ -42,31 +46,78 @@ jobs:
           DIR_MULTI="Multi-Sheet Songs"
           DIR_SONGS="Songs"
 
-          TOTAL_MULTI=$(find "$DIR_MULTI" -type f -not -name ".gitkeep" -not -name ".keep" 2>/dev/null | wc -l)
-          TOTAL_SONGS=$(find "$DIR_SONGS" -type f -not -name ".gitkeep" -not -name ".keep" 2>/dev/null | wc -l)
+          count_total() {
+            find "$1" -type f -not -name ".gitkeep" -not -name ".keep" 2>/dev/null | wc -l
+          }
 
-          if [ "$PREV_TAG" == "NONE" ]; then
-            UPDATED_MULTI="First Release"
-            UPDATED_SONGS="First Release"
-            COMPARE_MD="First Release"
-          else
-            UPDATED_MULTI=$(git diff --name-only "$PREV_TAG" HEAD -- "$DIR_MULTI" | wc -l)
-            UPDATED_SONGS=$(git diff --name-only "$PREV_TAG" HEAD -- "$DIR_SONGS" | wc -l)
-
-            COMPARE_URL="https://github.com/$REPO/compare/$PREV_TAG...$CURRENT_TAG"
-            COMPARE_MD="[🔄 **View Full Changelog** ($PREV_TAG ... $CURRENT_TAG)]($COMPARE_URL)"
-          fi
-
-          echo "Multi-Sheet: Total=$TOTAL_MULTI, Updated=$UPDATED_MULTI"
-          echo "Songs: Total=$TOTAL_SONGS, Updated=$UPDATED_SONGS"
+          TOTAL_MULTI=$(count_total "$DIR_MULTI")
+          TOTAL_SONGS=$(count_total "$DIR_SONGS")
 
           echo "STATS_TOTAL_MULTI=$TOTAL_MULTI" >> $GITHUB_ENV
           echo "STATS_TOTAL_SONGS=$TOTAL_SONGS" >> $GITHUB_ENV
-          echo "STATS_UPDATED_MULTI=$UPDATED_MULTI" >> $GITHUB_ENV
-          echo "STATS_UPDATED_SONGS=$UPDATED_SONGS" >> $GITHUB_ENV
           echo "PREV_TAG_NAME=$PREV_TAG" >> $GITHUB_ENV
           echo "CURRENT_TAG_NAME=$CURRENT_TAG" >> $GITHUB_ENV
-          echo "COMPARE_LINK_MD=$COMPARE_MD" >> $GITHUB_ENV
+
+          if [ "$PREV_TAG" != "NONE" ]; then
+            echo "COMPARE_URL=https://github.com/$REPO/compare/$PREV_TAG...$CURRENT_TAG" >> $GITHUB_ENV
+          fi
+
+          format_count() {
+            if [ "$1" == "0" ]; then echo "-"; else echo "$1"; fi
+          }
+
+          calculate_diff_stats() {
+            local DIR=$1
+            local P_TAG=$2
+            local VAR_PREFIX=$3
+
+            if [ "$P_TAG" == "NONE" ]; then
+              local TOTAL=$(count_total "$DIR")
+              echo "${VAR_PREFIX}_A=$TOTAL" >> $GITHUB_ENV
+              echo "${VAR_PREFIX}_M=-" >> $GITHUB_ENV
+              echo "${VAR_PREFIX}_D=-" >> $GITHUB_ENV
+              echo "${VAR_PREFIX}_R=-" >> $GITHUB_ENV
+              echo "${VAR_PREFIX}_MV=-" >> $GITHUB_ENV
+              return
+            fi
+
+            echo "----------------------------------------------------------------------"
+            echo "🔎 Analyzing changes for: $DIR"
+            echo "📝 Command: git diff --name-status -M $P_TAG HEAD -- \"$DIR\""
+
+            CHANGES=$(git diff --name-status -M "$P_TAG" HEAD -- "$DIR")
+
+            if [ -z "$CHANGES" ]; then
+                echo "   (No changes found)"
+            else
+                echo "$CHANGES"
+            fi
+            echo "----------------------------------------------------------------------"
+
+            CNT_A=$(echo "$CHANGES" | grep "^A" | wc -l)
+            CNT_M=$(echo "$CHANGES" | grep "^M" | wc -l)
+            CNT_D=$(echo "$CHANGES" | grep "^D" | wc -l)
+
+            R_STATS=$(echo "$CHANGES" | grep "^R" | awk -F'\t' '{
+              old=$2; new=$3;
+
+              sub(/[^\/]+$/, "", old);
+              sub(/[^\/]+$/, "", new);
+              if (old == new) print "REN"; else print "MOV";
+            }')
+
+            CNT_R=$(echo "$R_STATS" | grep "REN" | wc -l)
+            CNT_MV=$(echo "$R_STATS" | grep "MOV" | wc -l)
+
+            echo "${VAR_PREFIX}_A=$(format_count $CNT_A)" >> $GITHUB_ENV
+            echo "${VAR_PREFIX}_M=$(format_count $CNT_M)" >> $GITHUB_ENV
+            echo "${VAR_PREFIX}_D=$(format_count $CNT_D)" >> $GITHUB_ENV
+            echo "${VAR_PREFIX}_R=$(format_count $CNT_R)" >> $GITHUB_ENV
+            echo "${VAR_PREFIX}_MV=$(format_count $CNT_MV)" >> $GITHUB_ENV
+          }
+
+          calculate_diff_stats "$DIR_MULTI" "$PREV_TAG" "MULTI"
+          calculate_diff_stats "$DIR_SONGS" "$PREV_TAG" "SONGS"
 
       - name: Install 7-Zip & Utils
         run: sudo apt-get update && sudo apt-get install -y p7zip-full wget jq curl
@@ -135,28 +186,37 @@ jobs:
           TAG_RAW=${{ github.ref_name }}
           TAG_CLEAN=${TAG_RAW#v}
           TAG_FORMATTED=${TAG_CLEAN/-/ - }
+
           RELEASE_TITLE="Sky1984 Sheets Collection Release - ${TAG_FORMATTED}"
           echo "RELEASE_TITLE=$RELEASE_TITLE" >> $GITHUB_ENV
 
           REPO_URL="https://github.com/${{ github.repository }}"
-          LINK_CURRENT="[${{ env.CURRENT_TAG_NAME }}]($REPO_URL/tree/${{ env.CURRENT_TAG_NAME }})"
-          if [ "${{ env.PREV_TAG_NAME }}" == "NONE" ]; then
-            LINK_PREV="NONE"
-          else
-            LINK_PREV="[${{ env.PREV_TAG_NAME }}]($REPO_URL/tree/${{ env.PREV_TAG_NAME }})"
-          fi
+          DATE_NOW=$(date +'%Y-%m-%d')
 
-          echo "$RELEASE_TITLE" > release_body.md
+          BODY_HEADER="### Sky1984 Sheets Collection Release - [${TAG_RAW}]($REPO_URL/tree/${TAG_RAW}) (${DATE_NOW})"
+          echo "$BODY_HEADER" > release_body.md
+
           echo "" >> release_body.md
 
           echo "### 📊 Statistics" >> release_body.md
-          echo "${{ env.COMPARE_LINK_MD }}" >> release_body.md
+
           echo "" >> release_body.md
-          echo "| Category | Total Files | $LINK_CURRENT vs $LINK_PREV |" >> release_body.md
-          echo "| :--- | :---: | :---: |" >> release_body.md
-          echo "| **Multi-Sheet Songs** | ${{ env.STATS_TOTAL_MULTI }} | ${{ env.STATS_UPDATED_MULTI }} |" >> release_body.md
-          echo "| **Songs** | ${{ env.STATS_TOTAL_SONGS }} | ${{ env.STATS_UPDATED_SONGS }} |" >> release_body.md
+
+          echo "| Category | Total | ➕ Added | 📝 Modified | 🗑️ Deleted | 🏷️ Renamed | 🚚 Moved |" >> release_body.md
+          echo "| :--- | :---: | :---: | :---: | :---: | :---: | :---: |" >> release_body.md
+          echo "| **Multi-Sheet** | ${{ env.STATS_TOTAL_MULTI }} | ${{ env.MULTI_A }} | ${{ env.MULTI_M }} | ${{ env.MULTI_D }} | ${{ env.MULTI_R }} | ${{ env.MULTI_MV }} |" >> release_body.md
+          echo "| **Songs** | ${{ env.STATS_TOTAL_SONGS }} | ${{ env.SONGS_A }} | ${{ env.SONGS_M }} | ${{ env.SONGS_D }} | ${{ env.SONGS_R }} | ${{ env.SONGS_MV }} |" >> release_body.md
+
           echo "" >> release_body.md
+
+          if [ "${{ env.PREV_TAG_NAME }}" == "NONE" ]; then
+            echo "First Release" >> release_body.md
+          else
+            printf "🔄 **View Full Changelog:** [\`%s...%s\`](%s)\n" \
+              "${{ env.PREV_TAG_NAME }}" \
+              "${{ env.CURRENT_TAG_NAME }}" \
+              "${{ env.COMPARE_URL }}" >> release_body.md
+          fi
 
           echo "<details>" >> release_body.md
           echo "<summary>🛡️ VirusTotal GitHub Action analysis:</summary>" >> release_body.md
@@ -167,6 +227,14 @@ jobs:
 
           echo "Generated Release Content:"
           cat release_body.md
+
+      - name: Attest Build Provenance
+        uses: actions/attest-build-provenance@v3.1.0
+        if: startsWith(github.ref, 'refs/tags/')
+        with:
+          subject-path: |
+            Sky1984*.exe
+            Sky1984*.7z
 
       - name: GH Release
         uses: softprops/action-gh-release@v2.5.0
