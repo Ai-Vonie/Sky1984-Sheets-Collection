@@ -3,6 +3,7 @@
 
 **Sky1984 Sheets Collection** — это обширная библиотека музыкальных листов, собранная с целью упрощения поиска нужных композиций в одном месте. Данные листы предназначены для игры на внутриигровых инструментах **Sky: Children of the Light** и использования на сайте *[Sky Music Nightly](https://sky-music-nightly.pages.dev/)*.
 
+> [!WARNING]
 > ⚠️ **Внимание!**
 > Данная коллекция не является полной или окончательной. Рекомендуется проверять другие источники и библиотеки на наличие обновлений, так как содержимое этого репозитория может быть устаревшим или неактуальным по сравнению с ними.
 
@@ -16,12 +17,12 @@
 1.  **[По названию файла](https://docs.github.com/search-github/searching-on-github/finding-files-on-github)** — нажмите клавишу `t` или кликните по кнопке (Go to file), чтобы начать поиск в меню быстрого перехода к файлу.
 2.  **[По содержимому файлов](https://docs.github.com/search-github/github-code-search/using-github-code-search)** — нажмите клавишу `/` или кликните на поле поиска сверху (Type `/` to search), чтобы активировать [глобальный поиск по коду в этом репозитории](https://github.com/search?q=repo%3AAi-Vonie%2FSky1984-Sheets-Collection%20&type=code).
 
-> ⚠️ **Внимание!**
+> [!IMPORTANT]
 > Для использования поиска по коду (содержимому файлов) необходимо **войти в учетную запись GitHub**.
 
 Рекомендуется ознакомиться с документацией об [ограничениях поиска по коду](https://docs.github.com/search-github/github-code-search/about-github-code-search#limitations) и [специальном синтаксисе запросов](https://docs.github.com/search-github/github-code-search/understanding-github-code-search-syntax), чтобы понимать возможности и технические ограничения.
 
-# 💾 Как скачать
+# 💾 Как скачать [![Последний релиз](https://img.shields.io/github/v/release/Ai-Vonie/Sky1984-Sheets-Collection?label=Последняя%20версия&style=flat-square&color=blue)](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/releases/latest)
 
 Скачать можно как отдельные файлы, так и целые папки или весь репозиторий сразу.
 
@@ -44,7 +45,7 @@ GitHub не позволяет скачивать отдельные папки 
 2.  Нажмите зеленую кнопку **`<> Code`**.
 3.  В выпадающем меню выберите [**`Download ZIP`**](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/archive/refs/heads/master.zip).
 
-Также можно скачать конкретную папку и весь репозиторий во вкладке [**Releases**](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/releases).
+Также можно скачать конкретную папку или весь репозиторий во вкладке [**Releases**](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/releases).
 
 # 💭 Зачем?
 

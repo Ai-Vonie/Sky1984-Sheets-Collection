@@ -3,6 +3,7 @@
 
 **Sky1984 Sheets Collection** is an extensive library of music sheets collected to simplify the search for specific compositions in one place. These sheets are designed for playing on in-game instruments in **Sky: Children of the Light** and for use on the *[Sky Music Nightly](https://sky-music-nightly.pages.dev/)* site.
 
+> [!WARNING]
 > ⚠️ **Attention!**
 > This collection is not complete or final. It is recommended to check other sources and libraries for updates, as the content of this repository may be outdated or irrelevant compared to them.
 
@@ -16,12 +17,12 @@ The repository search works in two modes:
 1.  **[By file name](https://docs.github.com/search-github/searching-on-github/finding-files-on-github)** — press `t` or click the button (Go to file) to start searching in the file quick jump menu.
 2.  **[By file content](https://docs.github.com/search-github/github-code-search/using-github-code-search)** — press `/` or click the search field above (Type `/` to search) to activate [global code search in this repository](https://github.com/search?q=repo%3AAi-Vonie%2FSky1984-Sheets-Collection%20&type=code).
 
-> ⚠️ **Attention!**
+> [!IMPORTANT]
 > To use code search (file content), you must **be logged into your GitHub account**.
 
 It is recommended to read the documentation on [code search limitations](https://docs.github.com/search-github/github-code-search/about-github-code-search#limitations) and [special query syntax](https://docs.github.com/search-github/github-code-search/understanding-github-code-search-syntax) to understand the capabilities and technical constraints.
 
-# 💾 How to Download
+# 💾 How to Download [![Latest Release](https://img.shields.io/github/v/release/Ai-Vonie/Sky1984-Sheets-Collection?label=Latest%20Version&style=flat-square)](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/releases/latest)
 
 You can download individual files, specific folders, or the entire repository at once.
 

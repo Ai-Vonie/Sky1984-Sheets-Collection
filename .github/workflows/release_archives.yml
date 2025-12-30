@@ -198,14 +198,18 @@ jobs:
 
           echo "" >> release_body.md
 
+          echo "&nbsp;" >> release_body.md
+
+          echo "" >> release_body.md
+
           echo "### 📊 Statistics" >> release_body.md
 
           echo "" >> release_body.md
 
           echo "| Category | Total | ➕ Added | 📝 Modified | 🗑️ Deleted | 🏷️ Renamed | 🚚 Moved |" >> release_body.md
           echo "| :--- | :---: | :---: | :---: | :---: | :---: | :---: |" >> release_body.md
-          echo "| **Multi-Sheet** | ${{ env.STATS_TOTAL_MULTI }} | ${{ env.MULTI_A }} | ${{ env.MULTI_M }} | ${{ env.MULTI_D }} | ${{ env.MULTI_R }} | ${{ env.MULTI_MV }} |" >> release_body.md
-          echo "| **Songs** | ${{ env.STATS_TOTAL_SONGS }} | ${{ env.SONGS_A }} | ${{ env.SONGS_M }} | ${{ env.SONGS_D }} | ${{ env.SONGS_R }} | ${{ env.SONGS_MV }} |" >> release_body.md
+          echo "| [**Multi-Sheets**]($REPO_URL/tree/$TAG_RAW/Multi-Sheet%20Songs) | ${{ env.STATS_TOTAL_MULTI }} | ${{ env.MULTI_A }} | ${{ env.MULTI_M }} | ${{ env.MULTI_D }} | ${{ env.MULTI_R }} | ${{ env.MULTI_MV }} |" >> release_body.md
+          echo "| [**Songs**]($REPO_URL/tree/$TAG_RAW/Songs) | ${{ env.STATS_TOTAL_SONGS }} | ${{ env.SONGS_A }} | ${{ env.SONGS_M }} | ${{ env.SONGS_D }} | ${{ env.SONGS_R }} | ${{ env.SONGS_MV }} |" >> release_body.md
 
           echo "" >> release_body.md
 
@@ -230,7 +234,7 @@ jobs:
 
       - name: Attest Build Provenance
         uses: actions/attest-build-provenance@v3.1.0
-        if: startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/') && !env.ACT
         with:
           subject-path: |
             Sky1984*.exe
@@ -238,7 +242,7 @@ jobs:
 
       - name: GH Release
         uses: softprops/action-gh-release@v2.5.0
-        if: startsWith(github.ref, 'refs/tags/')
+        if: startsWith(github.ref, 'refs/tags/') && !env.ACT
         with:
           name: ${{ env.RELEASE_TITLE }}
           files: |
