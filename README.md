@@ -14,8 +14,8 @@ For an effective search of the desired composition, try to follow these recommen
 *   **Avoid clutter:** Exclude **stop words** (articles, conjunctions, prepositions) and specific symbols from your query.
 
 The repository search works in two modes:
-1.  **[By file name](https://docs.github.com/search-github/searching-on-github/finding-files-on-github)** — press `t` or click the button (Go to file) to start searching in the file quick jump menu.
-2.  **[By file content](https://docs.github.com/search-github/github-code-search/using-github-code-search)** — press `/` or click the search field above (Type `/` to search) to activate [global code search in this repository](https://github.com/search?q=repo%3AAi-Vonie%2FSky1984-Sheets-Collection%20&type=code).
+1.  **[By file name](https://docs.github.com/search-github/searching-on-github/finding-files-on-github)** — press `t` or click the button **`Go to file`** to start searching in the file quick jump menu.
+2.  **[By file content](https://docs.github.com/search-github/github-code-search/using-github-code-search)** — press `/` or click the search field above **`Type / to search`** to activate [global code search in this repository](https://github.com/search?q=repo%3AAi-Vonie%2FSky1984-Sheets-Collection%20&type=code).
 
 > [!IMPORTANT]
 > To use code search (file content), you must **be logged into your GitHub account**.
@@ -28,9 +28,9 @@ You can download individual files, specific folders, or the entire repository at
 
 ### 1. Downloading an Individual File
 Go to the page of the desired file and choose a convenient method:
-*   **Download file:** Click the icon (**Download raw file**) in the upper right corner above the file code.
-*   **Copy content:** Click the icon (**Copy raw file**) to copy the text to the clipboard.
-*   **Via Raw:** Click the **Raw** button, then press `Ctrl + S` (Windows) or `Cmd + S` (macOS) to save the file.
+*   **Download file:** Click the icon **`Download raw file`** in the upper right corner above the file code.
+*   **Copy content:** Click the icon **`Copy raw file`** to copy the text to the clipboard.
+*   **Via Raw:** Click the **`Raw`** button, then press `Ctrl + S` (Windows) or `Cmd + S` (macOS) to save the file.
 
 ### 2. Downloading a Specific Folder
 GitHub does not allow downloading individual folders by default. Use [Download Directory](https://github.com/download-directory/download-directory.github.io) for this:
@@ -59,8 +59,9 @@ Initially, ±59,457 files were collected. The final collection is the result whe
 A custom algorithm was used for filtering with the following logic:
 1.  **Exact Duplicates:** Comparison by SHA-256 file hash.
 2.  **Structural Duplicates:** Analysis of JSON metadata content.
-3.  **Layer Variants:** Comparison of note signatures to identify different key variations of the same chart.
-4.  **Fuzzy Matching:** Comparison of note sequences within the same BPM group to identify similar arrangements (with a similarity threshold of ~80%).
+3.  **Exact Layer Variants:** Comparison of exact note signatures to identify different key variations of the same chart.
+4.  **Fuzzy Layer Variants:** Comparison of note signatures to identify different key variations with slight deviations (with a similarity threshold of ~97%).
+5.  **Fuzzy Content Matching:** Comparison of full note sequences within the same BPM group to identify similar arrangements (with a similarity threshold of ~80%).
 
 > [!NOTE]
-> **Note:** Some files were allowed into the repository if song variations were encountered (*Easy/Hard*, *V1/V2*, and other possible options).
+> **Note:** Some files were allowed into the repository if song variations were encountered (*Easy/Hard*, *V1/V2*, *Multi/Solo Sheets* and other possible options).
