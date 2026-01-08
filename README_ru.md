@@ -46,6 +46,61 @@ GitHub не позволяет скачивать отдельные папки 
 3.  В выпадающем меню выберите [**`Download ZIP`**](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/archive/refs/heads/master.zip).
 
 Также можно скачать конкретную папку или весь репозиторий во вкладке [**Releases**](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/releases).
+> Для архивов используется специальный алгоритм сжатия с настройками, оптимизированными для структуры этих файлов, чтобы обеспечить минимальный размер.
+
+# 🎹 MIDI в Sky Sheet Конвертер [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Kia0VrRyctLVs1q0lYKJVnGpW45U7_EQ?usp=sharing)
+
+Если вы хотите создать лист для Sky из MIDI-файла, вы можете воспользоваться специальным инструментом конвертации по ссылке ниже:
+
+```
+https://colab.research.google.com/drive/1Kia0VrRyctLVs1q0lYKJVnGpW45U7_EQ?usp=sharing
+```
+
+> [!WARNING]
+> ⚠️ **Внимание!**
+> Данный инструмент работает на базе упрощённого алгоритма без использования каких-либо продвинутых сторонних библиотек для глубокого музыкального анализа. Рекомендуется использовать другие специализированные инструменты по транспонированию MIDI, так как данный конвертер может быть несовершенным или менее функциональным по сравнению с ними.
+
+С примерами неплохих конвертаций, выполненных с помощью этого скрипта, можно ознакомиться на Discord-сервере **[SkyAutoMusic](https://discord.gg/wzjWKyJtmk)** по ссылкам ниже:
+
+| Композиция | Ссылка на сообщение | Ссылка на скачивание |
+| :--- | :--- | :--- |
+| [*My Dearest - supercell Guilty Crown OP1 + Animenz's 10th Anniversary*](https://www.youtube.com/watch?v=lAXJPop9LaY) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1458087590593958000) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1458087590635896988/My_Dearest_-_supercell_Guilty_Crown_OP1__Animenzs_10th_Anniversary.txt) |
+| [*Oppenheimer Can You Hear the Music - Music by Ludwig Göransson Arrangement by Akmigone*](https://www.youtube.com/watch?v=3jBtnMUlIzo) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1457687970420097221) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1457687970881736836/Oppenheimer_Can_You_Hear_the_Music_-_Music_by_Ludwig_Goransson_Arrangement_by_Akmigone.txt) |
+| [*Interstellar*](https://musescore.com/user/18619471/scores/5124259) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1457681743531474987) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1457681741136396401/Interstellar.txt) |
+| [*「ナイト・オブ・ナイツ」を弾き直してみたんですが... – Marasy8*](https://www.youtube.com/watch?v=OyUJnV2R-5g) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1458440137250963487) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1458440135451475978/Marasy8.txt) |
+| [*ナイト・オブ・ナイツ 2020 (marasy arr.)*](https://www.youtube.com/watch?v=OixrgxwNGyg) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1457447445897281758) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1457447446333624403/2020_marasy_arr..txt) |
+| [*Touhou Boss Rush!! (I)*](https://musescore.com/user/29625/scores/5935037) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1458211093712207964) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1458211093431193700/Touhou_Boss_Rush_I.txt) |
+| [*Senbonzakura (Piano Ballade) - Hatsune Miku*](https://www.youtube.com/watch?v=mI--7elwLgk) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1457632458081177833) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1457632455199555699/Senbonzakura_Piano_Ballade_-_Hatsune_Miku.txt) |
+| [*Kamado Tanjiro no Uta - Go Shiina feat. Nami Nakagawa (The title is too long)*](https://www.youtube.com/watch?v=-jzET1Fe3oo) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1457632458081177833) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1457632457196306442/Kamado_Tanjiro_no_Uta_-_Go_Shiina_feat._Nami_Nakagawa_The_title_is_too_long.txt) |
+| [*One Last Kiss - Evangelion 3.0 + 1.0 Theme Song – Music by Hikaru Utada Arrangement by Animenz*](https://www.youtube.com/watch?v=m4DF7mAgMoI) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1458779446793211935) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1458779446915108992/One_Last_Kiss_-_Evangelion_3.0__1.0_Theme_Song_Music_by_Hikaru_Utada_Arrangement_by_Animenz.txt) |
+| [*Interstellar Main Theme – Hans Zimmer - Arrangement by Peter Buka*](https://www.youtube.com/watch?v=BTBPAmcoZZA) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1458503196497547401) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1458503196241690668/Interstellar_Main_Theme_Hans_Zimmer_-_Arrangement_by_Peter_Buka.txt) |
+| [*Night of Nights - COOL&CREATE Marasy8*](https://musescore.com/user/38235231/scores/6338677) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1458510115714891849) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1458510114658189505/Night_of_Nights_-_COOLCREATE_Marasy8.txt) |
+| [*Night Of Nights - COOL&CREATE ZUN*](https://musescore.com/user/31220767/scores/6258355) | [💬 Перейти](https://discord.com/channels/735827593710010369/798936282449182741/1458510115714891849) | [💾 Скачать](https://fixcdn.hyonsu.com/attachments/798936282449182741/1458510115790655518/Night_Of_Nights_-_COOLCREATE_ZUN.txt) |
+
+> [!NOTE]
+> **Примечание:** Другие примеры конвертации можно найти в истории канала, просмотрев сообщения рядом с указанными выше ссылками (в те же даты).
+
+### 📝 Рекомендации по использованию
+Для получения наилучшего результата следуйте рекомендуемым шагам:
+
+1.  **Выбор исходника:** Используйте MIDI-файлы с четкой структурой (например, *Piano Solo* версии); избегайте оркестровых файлов с десятками дорожек.
+2.  **Именование файла:** Перед конвертацией переименуйте MIDI-файл так, как вы хотите видеть название песни.
+    *   Скрипт использует имя файла для заполнения поля `"name"` внутри листа.
+    *   Рекомендуется заранее удалить лишние части из названия (например, *[Piano Solo]*, *«Synthesia»* и другие). Если вы забыли это сделать, то отредактируйте поле `"name"` внутри JSON-файла вручную.
+3.  **Проверка результата:** Для прослушивания и проверки полученного листа используйте *Секвенсор (Composer)* на **[Sky Music Nightly](https://sky-music.specy.app/composer)** сайте, так как инструмент генерирует листы в формате JSON, валидном именно для этого сайта.
+4.  **Редактирование и полировка:** В настройках *Секвенсора (Composer)* доведите лист до *«идеала»*:
+    *   Настройте **Высоту тона (Pitch)** и/или измените **Инструмент** на другой.
+    *   Для атмосферного звучания можно включить эхо, изменив параметр **Base Reverb**.
+    *   Вручную исправьте "дефектные" места по типу **глиссандо** и **арпеджио**. Такие моменты лучше транспонировать, проредить или перерисовать вручную.
+5.  **Коррекция скорости:** Если автоматический режим (`Auto_Scroll`) подобрал некорректный множитель BPM и итоговая длительность композиции отличается от оригинала на 10–20 секунд и более, попробуйте перегенерировать файл, отключив `Auto_Scroll` и подобрав значение вручную через параметр `Manual_Multiplier`.
+6.  **Где брать MIDI-файлы:** Существует множество способов поиска и генерации MIDI-файлов, но самый простой вариант — ознакомиться с репозиторием **[dl-librescore](https://github.com/LibreScore/dl-librescore)**.
+
+> [!NOTE]
+> **Примечание:** Если выбранный MIDI-файл содержит очень большое количество нот (несколько десятков тысяч), процесс конвертации может занять от одной до нескольких минут.
+
+> [!TIP]
+> **📢 Поделитесь результатом!**
+> Не забудьте поделиться конвертированным skysheet файлом с другими на Discord-сервере **[SkyAutoMusic](https://discord.gg/wzjWKyJtmk)** в канале [**🎹 music / 🎶share-songs**](https://discord.com/channels/735827593710010369/798936282449182741).
 
 # 💭 Зачем?
 
