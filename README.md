@@ -1,3 +1,6 @@
+<!-- markdownlint-disable MD033 -->
+<!-- markdownlint-disable MD041 -->
+
 <div align="center">
 
 # [Sky1984 Sheets Collection](https://api.github.com/repos/Ai-Vonie/Sky1984-Sheets-Collection)
@@ -74,7 +77,7 @@ https://colab.research.google.com/drive/1Kia0VrRyctLVs1q0lYKJVnGpW45U7_EQ?usp=sh
 > [!WARNING]
 >
 > ⚠️ **Warning!**
-> This tool operates on a simplified algorithm and does not utilize advanced third-party libraries for deep musical analysis. It is recommended to use other specialized MIDI transposition tools, as this converter may be imperfect or lack functionality compared to professional alternatives.
+> This tool operates on a simplified algorithm and does not utilize advanced third-party libraries for deep musical analysis. It is recommended to use other specialized MIDI transposition tools, as this converter may be imperfect, or lack functionality compared to professional alternatives.
 
 Can find examples of decent conversions made with this script on the **[SkyAutoMusic](https://discord.gg/wzjWKyJtmk)** Discord server via the links below:
 
@@ -83,7 +86,7 @@ Can find examples of decent conversions made with this script on the **[SkyAutoM
 | [🎹](https://musescore.com/user/64980103/scores/13568578) [*My Dearest - supercell Guilty Crown OP1 + Animenz's 10th Anniversary*](https://www.youtube.com/watch?v=lAXJPop9LaY) | [💬 Discord](https://discord.com/channels/735827593710010369/798936282449182741/1458087590593958000)<br>[🐱 GitHub](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/blob/v26.01.08-v1.2.0/Songs/M/My%20Dearest%20-%20supercell%20Guilty%20Crown%20OP1%20+%20Animenz's%2010th%20Anniversary.txt) | [💾 Discord](https://fixcdn.hyonsu.com/attachments/798936282449182741/1458087590635896988/My_Dearest_-_supercell_Guilty_Crown_OP1__Animenzs_10th_Anniversary.txt) |
 | [🎹](https://musescore.com/user/81591427/scores/23161579) [*Oppenheimer Can You Hear the Music - Music by Ludwig Göransson Arrangement by Akmigone*](https://www.youtube.com/watch?v=3jBtnMUlIzo) | [💬 Discord](https://discord.com/channels/735827593710010369/798936282449182741/1457687970420097221)<br>[🐱 GitHub](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/blob/v26.01.08-v1.2.0/Songs/O/Oppenheimer%20Can%20You%20Hear%20the%20Music%20-%20Music%20by%20Ludwig%20Göransson%20Arrangement%20by%20Akmigone.txt) | [💾 Discord](https://fixcdn.hyonsu.com/attachments/798936282449182741/1457687970881736836/Oppenheimer_Can_You_Hear_the_Music_-_Music_by_Ludwig_Goransson_Arrangement_by_Akmigone.txt) |
 | [🎹](https://musescore.com/user/16423076/scores/6251635) *Freedom DiVE (Full) - xi* | [💬 Discord](https://discord.com/channels/735827593710010369/798936282449182741/1460584833871777987)<br>[🐱 GitHub](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/blob/v26.01.14-v1.2.2/Songs/F/Freedom%20DiVE%20(Full)%20-%20xi.txt) | [💾 Discord](https://fixcdn.hyonsu.com/attachments/798936282449182741/1460584833544753310/Freedom_DiVE_Full_-_xi.txt) |
-| [🎹](https://musescore.com/user/18619471/scores/5124259) *Interstellar* | [💬 Discord](https://discord.com/channels/735827593710010369/798936282449182741/1457681743531474987)<br><a href="https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/blob/v26.01.08-v1.2.0/Songs/I/Interstellar%20_~%7B%5B%23v3%5D%7D~_.txt">🐱 GitHub</a> | [💾 Discord](https://fixcdn.hyonsu.com/attachments/798936282449182741/1457681741136396401/Interstellar.txt) |
+| [🎹](https://musescore.com/user/18619471/scores/5124259) *Interstellar* | [💬 Discord](https://discord.com/channels/735827593710010369/798936282449182741/1457681743531474987)<br><a href = "https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/blob/v26.01.08-v1.2.0/Songs/I/Interstellar%20_~%7B%5B%23v3%5D%7D~_.txt">🐱 GitHub</a> | [💾 Discord](https://fixcdn.hyonsu.com/attachments/798936282449182741/1457681741136396401/Interstellar.txt) |
 | [🎹](https://musescore.com/user/72167122/scores/19208626) [*「ナイト・オブ・ナイツ」を弾き直してみたんですが... – Marasy8*](https://www.youtube.com/watch?v=OyUJnV2R-5g) | [💬 Discord](https://discord.com/channels/735827593710010369/798936282449182741/1458440137250963487)<br>[🐱 GitHub](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/blob/v26.01.08-v1.2.0/Songs/SymbolsDigits/「ナイト・オブ・ナイツ」を弾き直してみたんですが...%20–%20Marasy8.txt) | [💾 Discord](https://fixcdn.hyonsu.com/attachments/798936282449182741/1458440135451475978/Marasy8.txt) |
 | [🎹](https://musescore.com/user/6480061/scores/6443683) [*ナイト・オブ・ナイツ 2020 (marasy arr.)*](https://www.youtube.com/watch?v=OixrgxwNGyg) | [💬 Discord](https://discord.com/channels/735827593710010369/798936282449182741/1457447445897281758)<br>[🐱 GitHub](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/blob/v26.01.08-v1.2.0/Songs/Japanese/ナイト・オブ・ナイツ%202020%20(marasy%20arr.).txt) | [💾 Discord](https://fixcdn.hyonsu.com/attachments/798936282449182741/1457447446333624403/2020_marasy_arr..txt) |
 | [🎹](https://musescore.com/user/29625/scores/5935037) *Touhou Boss Rush!! (I)* | [💬 Discord](https://discord.com/channels/735827593710010369/798936282449182741/1458211093712207964)<br>[🐱 GitHub](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/blob/v26.01.08-v1.2.0/Songs/T/Touhou%20Boss%20Rush!!%20(I).txt) | [💾 Discord](https://fixcdn.hyonsu.com/attachments/798936282449182741/1458211093431193700/Touhou_Boss_Rush_I.txt) |
@@ -110,7 +113,7 @@ For the best results, follow these recommended steps:
 1. **Source Selection:** Use MIDI files with a clear structure (e.g., *Piano Solo* versions); avoid orchestral files with dozens of tracks.
 2. **File Naming:** Before converting, rename the MIDI file to how you want the song title to appear.
     * The script uses the filename to populate the internal `"name"` field of the sheet.
-    * It is recommended to remove unnecessary parts from the filename (e.g., *[Piano Solo]*, *«Synthesia»* and etc.) beforehand. If you forget to do this, you can manually edit the `"name"` field inside the JSON file later.
+    * It is recommended to remove unnecessary parts from the filename (e.g., *[Piano Solo]*, *«Synthesia»*, etc.) beforehand. If you forget to do this, you can manually edit the `"name"` field inside the JSON file later.
 3. **Result Verification:** To listen to and verify the resulting sheet, use the ***Composer*** on *[Sky Music Nightly](https://sky-music.specy.app/composer)* site, as the tool generates JSON sheets specifically valid for this site.
 4. **Editing and Polishing:** In the *Composer* settings, refine the sheet to *perfection*:
     * Adjust the **Pitch** and/or change the **Instrument**.
@@ -121,6 +124,8 @@ For the best results, follow these recommended steps:
 > [!NOTE]
 >
 > **Note:** If the selected MIDI file contains a very large number of notes (several tens of thousands), the conversion process may take from one to several minutes.
+
+<!-- -->
 
 > [!TIP]
 >
@@ -151,4 +156,21 @@ A custom algorithm was used for filtering duplicates with the following logic:
 
 > [!NOTE]
 >
-> **Note:** Some files were allowed into the repository if song variations were encountered (*Easy/Hard*, *V1/V2*, *Multi/Solo Sheets* and other possible options).
+> **Note:** Some files were allowed into the repository if song variations were encountered (e.g., *Easy/Hard*, *V1/V2*, *Multi/Solo Sheets* and other possible options).
+
+## ⚖️ Legal & Copyright
+
+### Repository
+
+The code, scripts, and tools created for this repository are licensed under the [**WTFPL**](LICENSE).
+
+### Sheet Music Collection
+
+The collection curation and the converted file formats (JSON/TXT) are dedicated to the public domain under [**The Unlicense**](LICENSE).
+
+The repository owner **waives all rights** to the compilation itself. However, please note:
+
+* **Original Compositions:** All rights belong to their respective composers, publishers, and copyright holders.
+* **Transcriptions:** Rights to the specific musical arrangements belong to the original authors who created the MIDI/Sheet files.
+
+This collection is provided strictly for **archival purposes**.
