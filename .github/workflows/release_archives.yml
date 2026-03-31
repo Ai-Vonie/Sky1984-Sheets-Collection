@@ -3,14 +3,14 @@ name: Release Archives
 on:
   push:
     tags:
-      - 'v*'
+      - v*
 
 env:
   # TRUE = Download SFX module from mcmilk/7-Zip-zstd
   # FALSE = Download Windows 7-Zip
   USE_MODDED_SFX: true
-  SEVENZIP_ZSTD: "Installer_7z-zstd-x64"
-  SEVENZIP_EXE: "7z2501-x64.exe"
+  SEVENZIP_ZSTD: Installer_7z-zstd-x64
+  SEVENZIP_EXE: 7z2501-x64.exe
 
 jobs:
   build-and-release:
@@ -20,10 +20,27 @@ jobs:
       id-token: write
       attestations: write
       artifact-metadata: write
+    outputs:
+      STATS_TOTAL_MULTI: ${{ steps.stats.outputs.STATS_TOTAL_MULTI }}
+      STATS_TOTAL_SONGS: ${{ steps.stats.outputs.STATS_TOTAL_SONGS }}
+      PREV_TAG_NAME: ${{ steps.stats.outputs.PREV_TAG_NAME }}
+      CURRENT_TAG_NAME: ${{ steps.stats.outputs.CURRENT_TAG_NAME }}
+      COMPARE_URL: ${{ steps.stats.outputs.COMPARE_URL }}
+      MULTI_A: ${{ steps.stats.outputs.MULTI_A }}
+      MULTI_M: ${{ steps.stats.outputs.MULTI_M }}
+      MULTI_D: ${{ steps.stats.outputs.MULTI_D }}
+      MULTI_R: ${{ steps.stats.outputs.MULTI_R }}
+      MULTI_MV: ${{ steps.stats.outputs.MULTI_MV }}
+      SONGS_A: ${{ steps.stats.outputs.SONGS_A }}
+      SONGS_M: ${{ steps.stats.outputs.SONGS_M }}
+      SONGS_D: ${{ steps.stats.outputs.SONGS_D }}
+      SONGS_R: ${{ steps.stats.outputs.SONGS_R }}
+      SONGS_MV: ${{ steps.stats.outputs.SONGS_MV }}
+      RELEASE_TITLE: ${{ steps.gen_body.outputs.RELEASE_TITLE }}
 
     steps:
       - name: Checkout
-        uses: actions/checkout@v6.0.1
+        uses: actions/checkout@v6.0.2
         with:
           fetch-depth: 0
 
@@ -41,7 +58,7 @@ jobs:
           if [ -z "$PREV_TAG" ]; then PREV_TAG="NONE"; fi
 
           echo "Current Tag: $CURRENT_TAG"
-          echo "Previous Tag found: $PREV_TAG"
+          echo "Previous Tag: $PREV_TAG"
 
           DIR_MULTI="Multi-Sheet Songs"
           DIR_SONGS="Songs"
@@ -53,13 +70,14 @@ jobs:
           TOTAL_MULTI=$(count_total "$DIR_MULTI")
           TOTAL_SONGS=$(count_total "$DIR_SONGS")
 
-          echo "STATS_TOTAL_MULTI=$TOTAL_MULTI" >> $GITHUB_ENV
-          echo "STATS_TOTAL_SONGS=$TOTAL_SONGS" >> $GITHUB_ENV
-          echo "PREV_TAG_NAME=$PREV_TAG" >> $GITHUB_ENV
-          echo "CURRENT_TAG_NAME=$CURRENT_TAG" >> $GITHUB_ENV
+          echo "STATS_TOTAL_MULTI=$TOTAL_MULTI" >> $GITHUB_OUTPUT
+          echo "STATS_TOTAL_SONGS=$TOTAL_SONGS" >> $GITHUB_OUTPUT
+          echo "PREV_TAG_NAME=$PREV_TAG" >> $GITHUB_OUTPUT
+          echo "CURRENT_TAG_NAME=$CURRENT_TAG" >> $GITHUB_OUTPUT
 
           if [ "$PREV_TAG" != "NONE" ]; then
-            echo "COMPARE_URL=https://github.com/$REPO/compare/$PREV_TAG...$CURRENT_TAG" >> $GITHUB_ENV
+            COMPARE_URL_VAL="https://github.com/$REPO/compare/$PREV_TAG...$CURRENT_TAG"
+            echo "COMPARE_URL=$COMPARE_URL_VAL" >> $GITHUB_OUTPUT
           fi
 
           format_count() {
@@ -73,11 +91,11 @@ jobs:
 
             if [ "$P_TAG" == "NONE" ]; then
               local TOTAL=$(count_total "$DIR")
-              echo "${VAR_PREFIX}_A=$TOTAL" >> $GITHUB_ENV
-              echo "${VAR_PREFIX}_M=-" >> $GITHUB_ENV
-              echo "${VAR_PREFIX}_D=-" >> $GITHUB_ENV
-              echo "${VAR_PREFIX}_R=-" >> $GITHUB_ENV
-              echo "${VAR_PREFIX}_MV=-" >> $GITHUB_ENV
+              echo "${VAR_PREFIX}_A=$TOTAL" >> $GITHUB_OUTPUT
+              echo "${VAR_PREFIX}_M=-" >> $GITHUB_OUTPUT
+              echo "${VAR_PREFIX}_D=-" >> $GITHUB_OUTPUT
+              echo "${VAR_PREFIX}_R=-" >> $GITHUB_OUTPUT
+              echo "${VAR_PREFIX}_MV=-" >> $GITHUB_OUTPUT
               return
             fi
 
@@ -109,11 +127,11 @@ jobs:
             CNT_R=$(echo "$R_STATS" | grep "REN" | wc -l)
             CNT_MV=$(echo "$R_STATS" | grep "MOV" | wc -l)
 
-            echo "${VAR_PREFIX}_A=$(format_count $CNT_A)" >> $GITHUB_ENV
-            echo "${VAR_PREFIX}_M=$(format_count $CNT_M)" >> $GITHUB_ENV
-            echo "${VAR_PREFIX}_D=$(format_count $CNT_D)" >> $GITHUB_ENV
-            echo "${VAR_PREFIX}_R=$(format_count $CNT_R)" >> $GITHUB_ENV
-            echo "${VAR_PREFIX}_MV=$(format_count $CNT_MV)" >> $GITHUB_ENV
+            echo "${VAR_PREFIX}_A=$(format_count $CNT_A)" >> $GITHUB_OUTPUT
+            echo "${VAR_PREFIX}_M=$(format_count $CNT_M)" >> $GITHUB_OUTPUT
+            echo "${VAR_PREFIX}_D=$(format_count $CNT_D)" >> $GITHUB_OUTPUT
+            echo "${VAR_PREFIX}_R=$(format_count $CNT_R)" >> $GITHUB_OUTPUT
+            echo "${VAR_PREFIX}_MV=$(format_count $CNT_MV)" >> $GITHUB_OUTPUT
           }
 
           calculate_diff_stats "$DIR_MULTI" "$PREV_TAG" "MULTI"
@@ -127,15 +145,34 @@ jobs:
           if [ "${{ env.USE_MODDED_SFX }}" == "true" ]; then
             echo "🔹 Mode: Downloading Modded SFX (mcmilk)"
 
-            RESPONSE=$(curl -sL https://api.github.com/repos/mcmilk/7-Zip-zstd/releases/latest)
-            DOWNLOAD_URL=$(echo "$RESPONSE" | jq -r '.assets[] | select(.name | test("^7z.*-x64\\.exe$")) | .browser_download_url')
-            if [ -z "$DOWNLOAD_URL" ] || [ "$DOWNLOAD_URL" == "null" ]; then
-              echo "Failed to find installer EXE in release assets."
-              echo "Response content: $RESPONSE"
+            API_URL="https://api.github.com/repos/mcmilk/7-Zip-zstd/releases/latest"
+            HTTP_CODE=$(curl -sL -w "%{http_code}" -o response.json "$API_URL")
+            RESPONSE=$(cat response.json)
+            rm -f response.json
+
+            if [ "$HTTP_CODE" -ne 200 ]; then
+              echo "❌ GitHub API returned HTTP $HTTP_CODE"
+              echo "Response: $RESPONSE"
               exit 1
             fi
 
-            echo "Found ${{ env.SEVENZIP_ZSTD }} URL: $DOWNLOAD_URL"
+            ASSETS_COUNT=$(echo "$RESPONSE" | jq -r '.assets | length // 0')
+            if [ "$ASSETS_COUNT" -eq 0 ] || [ "$ASSETS_COUNT" == "null" ]; then
+              echo "❌ No assets found in release"
+              echo "Response: $RESPONSE"
+              exit 1
+            fi
+
+            JQ_FILTER='.assets[] | select(.name | endswith("-x64.exe")) | .browser_download_url'
+            DOWNLOAD_URL=$(echo "$RESPONSE" | jq -r "$JQ_FILTER" | head -n 1)
+            if [ -z "$DOWNLOAD_URL" ] || [ "$DOWNLOAD_URL" == "null" ]; then
+              echo "❌ No matching .exe asset found (pattern: *-x64.exe)"
+              echo "Available assets:"
+              echo "$RESPONSE" | jq -r '.assets[].name'
+              exit 1
+            fi
+
+            echo "✅ Found: $DOWNLOAD_URL"
             wget -O ${{ env.SEVENZIP_ZSTD }}.exe "$DOWNLOAD_URL"
             7z e ${{ env.SEVENZIP_ZSTD }}.exe 7z.sfx -r
           else
@@ -153,14 +190,34 @@ jobs:
           FILE_MULTI_SHEET="Sky1984-Collection-Multi_Sheet_Songs-${CURRENT_DATE}.7z"
           FILE_SONGS="Sky1984-Collection-Songs-${CURRENT_DATE}.7z"
 
+          # Exclude: Git
+          EXCLUDE_GIT="-xr!.git*"
+
+          # Exclude: VSCode
+          EXCLUDE_VSCODE="-xr!.vscode"
+
+          # Exclude: Linters config
+          EXCLUDE_LINTERS="-xr!.trunk -xr!.editorconfig"
+
+          # Exclude: Assets
+          EXCLUDE_ASSETS="-xr!public"
+
+          # Exclude: Packages
+          EXCLUDE_PACKAGES="-xr!package*.json -xr!node_modules"
+
+          # Exclude: Temp files
+          EXCLUDE_TEMP="-xr!*.7z -xr!*.exe -xr!*.sfx"
+
+          EXCLUDE="$EXCLUDE_GIT $EXCLUDE_VSCODE $EXCLUDE_LINTERS"
+          EXCLUDE+=" $EXCLUDE_ASSETS $EXCLUDE_PACKAGES $EXCLUDE_TEMP"
           # LZMA2_PARAMS="-m0=lzma2:d=64m:fb=128 -ms=512m -mmt=on -bb0 -bsp0"
           PPMD_PARAMS="-m0=PPMd:mem=96m:o=8 -ms=512m -mmt=on -bb0 -bsp0"
 
-          7z a $PPMD_PARAMS -sfx./7z.sfx "${FILE_FULL}_x64.exe" . -xr!.git -xr!.github -xr!*.7z -xr!*.exe -xr!*.sfx
+          7z a $PPMD_PARAMS -sfx./7z.sfx "${FILE_FULL}_x64.exe" . $EXCLUDE
 
-          7z a $PPMD_PARAMS -t7z "$FILE_FULL.7z" . -xr!.git -xr!.github -xr!*.7z -xr!*.exe -xr!*.sfx
-          7z a $PPMD_PARAMS -t7z "$FILE_MULTI_SHEET" "Multi-Sheet Songs"
-          7z a $PPMD_PARAMS -t7z "$FILE_SONGS" "Songs"
+          7z a $PPMD_PARAMS -t7z "$FILE_FULL.7z" . $EXCLUDE
+          7z a $PPMD_PARAMS -t7z "$FILE_MULTI_SHEET" "Multi-Sheet Songs" $EXCLUDE
+          7z a $PPMD_PARAMS -t7z "$FILE_SONGS" "Songs" $EXCLUDE
 
           rm -f 7z.sfx
           rm -f "${{ env.SEVENZIP_ZSTD }}.exe"
@@ -168,7 +225,7 @@ jobs:
 
       - name: VirusTotal Scan
         id: vt_scan
-        uses: crazy-max/ghaction-virustotal@v4.2.0
+        uses: crazy-max/ghaction-virustotal@v5.0.0
         if: startsWith(github.ref, 'refs/tags/')
         with:
           vt_api_key: ${{ secrets.VT_API_KEY }}
@@ -180,20 +237,19 @@ jobs:
       - name: Generate Release Body
         id: gen_body
         if: startsWith(github.ref, 'refs/tags/')
-        env:
-          VT_RESULTS: ${{ steps.vt_scan.outputs.analysis }}
         run: |
           TAG_RAW=${{ github.ref_name }}
           TAG_CLEAN=${TAG_RAW#v}
           TAG_FORMATTED=${TAG_CLEAN/-/ - }
 
           RELEASE_TITLE="Sky1984 Sheets Collection Release - ${TAG_FORMATTED}"
-          echo "RELEASE_TITLE=$RELEASE_TITLE" >> $GITHUB_ENV
+          echo "RELEASE_TITLE=$RELEASE_TITLE" >> $GITHUB_OUTPUT
 
           REPO_URL="https://github.com/${{ github.repository }}"
           DATE_NOW=$(date +'%Y-%m-%d')
 
-          BODY_HEADER="### Sky1984 Sheets Collection Release - [${TAG_RAW}]($REPO_URL/tree/${TAG_RAW}) (${DATE_NOW})"
+          BODY_HEADER="### Sky1984 Sheets Collection Release -"
+          BODY_HEADER+=" [${TAG_RAW}]($REPO_URL/tree/${TAG_RAW}) (${DATE_NOW})"
           echo "$BODY_HEADER" > release_body.md
 
           echo "" >> release_body.md
@@ -206,26 +262,52 @@ jobs:
 
           echo "" >> release_body.md
 
-          echo "| Category | Total | ➕ Added | 📝 Modified | 🗑️ Deleted | 🏷️ Renamed | 🚚 Moved |" >> release_body.md
+          TABLE_HEADER="| Category | Total | ➕ Added | 📝 Modified |"
+          TABLE_HEADER+=" 🗑️ Deleted | 🏷️ Renamed | 🚚 Moved |"
+          echo "$TABLE_HEADER" >> release_body.md
           echo "| :--- | :---: | :---: | :---: | :---: | :---: | :---: |" >> release_body.md
-          echo "| [**Multi-Sheets**]($REPO_URL/tree/$TAG_RAW/Multi-Sheet%20Songs) | ${{ env.STATS_TOTAL_MULTI }} | ${{ env.MULTI_A }} | ${{ env.MULTI_M }} | ${{ env.MULTI_D }} | ${{ env.MULTI_R }} | ${{ env.MULTI_MV }} |" >> release_body.md
-          echo "| [**Songs**]($REPO_URL/tree/$TAG_RAW/Songs) | ${{ env.STATS_TOTAL_SONGS }} | ${{ env.SONGS_A }} | ${{ env.SONGS_M }} | ${{ env.SONGS_D }} | ${{ env.SONGS_R }} | ${{ env.SONGS_MV }} |" >> release_body.md
+          MULTI_SHEET_ROW="| [**Multi-Sheets**]"
+          MULTI_SHEET_ROW+="($REPO_URL/tree/$TAG_RAW/Multi-Sheet%20Songs) | "
+          MULTI_SHEET_ROW+="${{ steps.stats.outputs.STATS_TOTAL_MULTI }} | "
+          MULTI_SHEET_ROW+="${{ steps.stats.outputs.MULTI_A }} | "
+          MULTI_SHEET_ROW+="${{ steps.stats.outputs.MULTI_M }} | "
+          MULTI_SHEET_ROW+="${{ steps.stats.outputs.MULTI_D }} | "
+          MULTI_SHEET_ROW+="${{ steps.stats.outputs.MULTI_R }} | "
+          MULTI_SHEET_ROW+="${{ steps.stats.outputs.MULTI_MV }} |"
+          echo "$MULTI_SHEET_ROW" >> release_body.md
+          SONGS_ROW="| [**Songs**]"
+          SONGS_ROW+="($REPO_URL/tree/$TAG_RAW/Songs) | "
+          SONGS_ROW+="${{ steps.stats.outputs.STATS_TOTAL_SONGS }} | "
+          SONGS_ROW+="${{ steps.stats.outputs.SONGS_A }} | "
+          SONGS_ROW+="${{ steps.stats.outputs.SONGS_M }} | "
+          SONGS_ROW+="${{ steps.stats.outputs.SONGS_D }} | "
+          SONGS_ROW+="${{ steps.stats.outputs.SONGS_R }} | "
+          SONGS_ROW+="${{ steps.stats.outputs.SONGS_MV }} |"
+          echo "$SONGS_ROW" >> release_body.md
 
           echo "" >> release_body.md
 
-          if [ "${{ env.PREV_TAG_NAME }}" == "NONE" ]; then
+          if [ "${{ steps.stats.outputs.PREV_TAG_NAME }}" == "NONE" ]; then
             echo "First Release" >> release_body.md
           else
             printf "🔄 **View Full Changelog:** [\`%s...%s\`](%s)\n" \
-              "${{ env.PREV_TAG_NAME }}" \
-              "${{ env.CURRENT_TAG_NAME }}" \
-              "${{ env.COMPARE_URL }}" >> release_body.md
+              "${{ steps.stats.outputs.PREV_TAG_NAME }}" \
+              "${{ steps.stats.outputs.CURRENT_TAG_NAME }}" \
+              "${{ steps.stats.outputs.COMPARE_URL }}" >> release_body.md
           fi
 
-          echo "<details>" >> release_body.md
-          echo "<summary>🛡️ VirusTotal GitHub Action analysis:</summary>" >> release_body.md
           echo "" >> release_body.md
-          echo "$VT_RESULTS" | tr ',' '\n' | sed 's/^\([^=]*\)=\(.*\)/- [\1](\2)/' >> release_body.md
+
+          echo "---" >> release_body.md
+
+          echo "" >> release_body.md
+
+          echo "<details>" >> release_body.md
+          echo "<summary><b>🛡️ VirusTotal GitHub Action analysis:</b></summary>" >> release_body.md
+          echo "" >> release_body.md
+          VT_ANALYSIS="${{ steps.vt_scan.outputs.analysis }}"
+          SED_PATTERN='s/^\([^=]*\)=\(.*\)/- [\1](\2)/'
+          echo "$VT_ANALYSIS" | tr ',' '\n' | sed "$SED_PATTERN" >> release_body.md
           echo "" >> release_body.md
           echo "</details>" >> release_body.md
 
@@ -233,7 +315,7 @@ jobs:
           cat release_body.md
 
       - name: Attest Build Provenance
-        uses: actions/attest-build-provenance@v3.1.0
+        uses: actions/attest-build-provenance@v4.1.0
         if: startsWith(github.ref, 'refs/tags/') && !env.ACT
         with:
           subject-path: |
@@ -241,10 +323,10 @@ jobs:
             Sky1984*.7z
 
       - name: GH Release
-        uses: softprops/action-gh-release@v2.5.0
+        uses: softprops/action-gh-release@v2.6.1
         if: startsWith(github.ref, 'refs/tags/') && !env.ACT
         with:
-          name: ${{ env.RELEASE_TITLE }}
+          name: ${{ steps.gen_body.outputs.RELEASE_TITLE }}
           files: |
             Sky1984*.exe
             Sky1984*.7z

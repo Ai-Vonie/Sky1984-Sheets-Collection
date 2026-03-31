@@ -1,0 +1,51 @@
+name: Generate Auto Tag for Release
+
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - package.json
+
+jobs:
+  generate-tag:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6.0.2
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
+          fetch-depth: 0
+
+      - name: Get Tag Version
+        id: pkg
+        run: |
+          VERSION=$(jq -r '.version' package.json)
+
+          if [[ $VERSION != v* ]]; then
+            VERSION="v$VERSION"
+          fi
+
+          echo "Parsed version: $VERSION"
+          echo "VERSION=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Check Tag Already Exists
+        id: check
+        run: |
+          if git rev-parse "${{ steps.pkg.outputs.VERSION }}" >/dev/null 2>&1; then
+            echo "Tag ${{ steps.pkg.outputs.VERSION }} already exists. Skipping."
+            echo "EXISTS=true" >> $GITHUB_OUTPUT
+          else
+            echo "Tag does not exist. Proceeding."
+            echo "EXISTS=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Create and Push Tag
+        if: steps.check.outputs.EXISTS == 'false'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git tag ${{ steps.pkg.outputs.VERSION }}
+
+          git push origin ${{ steps.pkg.outputs.VERSION }}

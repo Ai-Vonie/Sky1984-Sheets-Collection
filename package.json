@@ -1,0 +1,51 @@
+{
+  "name": "sky1984-sheets-collection",
+  "version": "26.03.12-v1.2.4",
+  "private": true,
+  "description": "Sky1984 Sheets Collection: An extensive library of Sky: Children of the Light (Sky CotL) music sheets for in-game instruments and the Sky Music Nightly site. Tool: MIDI to Sky Sheet Converter",
+  "keywords": [
+    "sky",
+    "cotl",
+    "children-of-the-light",
+    "sky-cotl",
+    "sky-children-of-light",
+    "skycotl",
+    "skychildrenofthelight",
+    "skysheet",
+    "sheets",
+    "music-sheets",
+    "music-collection",
+    "music-library",
+    "tgc",
+    "thatskygame",
+    "thatskycompany"
+  ],
+  "homepage": "https://github.com/Ai-Vonie/Sky1984-Sheets-Collection#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ai-Vonie/Sky1984-Sheets-Collection.git"
+  },
+  "license": "SEE LICENSE IN LICENSE",
+  "author": {
+    "name": "Ai Vonie"
+  },
+  "scripts": {
+    "npm:start": "npm install",
+    "npm:update": "npm install --package-lock-only",
+    "npm-audit:fix": "npm audit fix --force",
+    "trunk:check": "trunk check --all --fix",
+    "trunk:format": "trunk fmt --all",
+    "trunk:init": "npm exec trunk init",
+    "tscanner:check": "npx tscanner check",
+    "tscanner:init": "npx tscanner init --full",
+    "update-deps": "npm update --save",
+    "update-deps-check": "npm outdated",
+    "upgrade-deps": "npx npm-check-updates -u && npm install"
+  },
+  "overrides": {
+    "tar": "^7.5.13"
+  },
+  "devDependencies": {
+    "@trunkio/launcher": "^1.3.4"
+  }
+}

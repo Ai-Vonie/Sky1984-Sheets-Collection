@@ -1,0 +1,29 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Trunk-Format",
+      "type": "shell",
+      "command": "trunk",
+      "args": ["fmt", "${file}"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "silent", "panel": "dedicated" }
+    },
+    {
+      "label": "Trunk-Format:All",
+      "type": "shell",
+      "command": "trunk",
+      "args": ["fmt", "--all"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "silent", "panel": "dedicated" }
+    },
+    {
+      "label": "Trunk-Check:All",
+      "type": "shell",
+      "command": "trunk",
+      "args": ["check", "--all", "--fix"],
+      "problemMatcher": [],
+      "presentation": { "reveal": "silent", "panel": "dedicated" }
+    }
+  ]
+}

@@ -1,0 +1,42 @@
+# This file controls the behavior of Trunk: https://docs.trunk.io/cli
+# To learn more about the format of this file, see https://docs.trunk.io/reference/trunk-yaml
+version: 0.1
+
+cli:
+  version: 1.25.0
+
+# Trunk provides extensibility via plugins. (https://docs.trunk.io/plugins)
+plugins:
+  sources:
+    - id: trunk
+      ref: v1.7.6
+      uri: https://github.com/trunk-io/plugins
+
+    - id: dev-trunk-plugins-tools
+      local: D:/dev-projects/dev-trunk-plugins-tools
+
+# This is the section where you manage your linters. (https://docs.trunk.io/check/configuration)
+lint:
+  # https://docs.trunk.io/code-quality/overview/deal-with-existing-issues#ignore-issues
+  ignore:
+    - linters: [ALL]
+      paths:
+        - .trunk/**
+
+        - "!Downloads/**"
+        - "!Imported_Success/**"
+        - Multi-Sheet Songs/**
+        - Songs/**
+        - VSRG/**
+
+        - LICENSE
+
+actions:
+  disabled:
+    - trunk-upgrade-available
+
+  enabled:
+    - trunk-cache-prune
+    - trunk-announce
+    - trunk-check-pre-push
+    - trunk-fmt-pre-commit

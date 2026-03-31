@@ -1,0 +1,1 @@
+{"rule":"GITHUB","sentence":"^\\QGo to download-directory.github.io (\\E(?:Dummy|Ina|Jimmy-|Dummy-|Maniquí-|Maniquíes-|Dummy\\+|Dummy's\\+)[0-9]+\\Q).\\E$"}
