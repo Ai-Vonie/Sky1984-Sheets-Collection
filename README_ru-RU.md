@@ -6,7 +6,8 @@
 
 # [Sky1984 Sheets Collection](https://api.github.com/repos/Ai-Vonie/Sky1984-Sheets-Collection)
 
-🌍 Читайте в: _[English (en-US)](README.md) ∙_ **⮞⮞ Русский (ru-RU) ⮜⮜**
+🌍 Читайте в: _[English (en-US)](README.md) ∙ [Español (es-ES)](README_es-ES.md) ∙_ **⮞⮞ Русский
+(ru-RU) ⮜⮜**
 
 </div>
 
@@ -24,7 +25,7 @@ _[Sky Music Nightly](https://sky-music-nightly.pages.dev/)_. Музыкальн�
 > быть устаревшим или неактуальным по сравнению с ними.
 
 <details open>
-<summary><b>Оглавление</b></summary>
+<summary><b>📋 Содержание</b></summary>
 
 ---
 

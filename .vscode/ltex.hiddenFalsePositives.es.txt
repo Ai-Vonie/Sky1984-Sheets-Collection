@@ -1,0 +1,13 @@
+{"rule":"MORFOLOGIK_RULE_ES","sentence":"^\\QSky1984 Sheets Collection\\E$"}
+{"rule":"MORFOLOGIK_RULE_ES","sentence":"^\\QEnglish (en-US) ∙ ⮞⮞ Español (es-ES) ⮜⮜ ∙ Русский (ru-RU)\\E$"}
+{"rule":"MORFOLOGIK_RULE_ES","sentence":"^\\QEstas partituras están diseñadas para tocarse en los instrumentos dentro del juego Sky:\\E$"}
+{"rule":"ESPACIO_DESPUES_DE_PUNTO","sentence":"^\\Q!NOTE\\E$"}
+{"rule":"ESPACIO_DESPUES_DE_PUNTO","sentence":"^\\Q!WARNING\\E$"}
+{"rule":"ESPACIO_DESPUES_DE_PUNTO","sentence":"^\\Q!IMPORTANT\\E$"}
+{"rule":"MORFOLOGIK_RULE_ES","sentence":"^\\QLas partituras musicales se encuentran en tres carpetas principales (Multi-Sheet Songs, Songs y VSRG), donde están ordenadas alfabéticamente.\\E$"}
+{"rule":"MORFOLOGIK_RULE_ES","sentence":"^\\QUsa Download Directory para esto:\\E$"}
+{"rule":"MORFOLOGIK_RULE_ES","sentence":"^\\QDescargar archivos desde las versiones (releases)\\E$"}
+{"rule":"MORFOLOGIK_RULE_ES","sentence":"^\\QTambién puedes descargar una carpeta específica o todo el repositorio como un archivo en la última versión publicada desde la pestaña Releases.\\E$"}
+{"rule":"MORFOLOGIK_RULE_ES","sentence":"^\\QDescargar archivos desde las versiones (releases)\n🎹 Convertidor de MIDI a partitura de Sky\n📝 Recomendaciones de uso\n💭 ¿Por qué?\n⚙️ Detalles técnicos\n⚖️ Aspectos legales y derechos de autor\nRepositorio\nColección de partituras\\E$"}
+{"rule":"MORFOLOGIK_RULE_ES","sentence":"^\\Q🎹 Convertidor de MIDI a partitura de Sky Open In Colab\\E$"}
+{"rule":"MORFOLOGIK_RULE_ES","sentence":"^\\QLa curación de la colección y los formatos de archivos convertidos (JSON/TXT) se dedican al dominio público bajo The Unlicense.\\E$"}

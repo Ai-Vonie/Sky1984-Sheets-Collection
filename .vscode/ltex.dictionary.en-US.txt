@@ -4,3 +4,4 @@ SkyAutoMusic
 dl-librescore
 skysheet
 Unlicense
+es-ES

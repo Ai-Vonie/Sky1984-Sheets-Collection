@@ -6,7 +6,8 @@
 
 # [Sky1984 Sheets Collection](https://api.github.com/repos/Ai-Vonie/Sky1984-Sheets-Collection)
 
-🌍 Read in: **⮞⮞ English (en-US) ⮜⮜** _∙ [Русский (ru-RU)](README_ru-RU.md)_
+🌍 Read in: **⮞⮞ English (en-US) ⮜⮜** _∙ [Español (es-ES)](README_es-ES.md) ∙
+[Русский (ru-RU)](README_ru-RU.md)_
 
 </div>
 
@@ -24,7 +25,7 @@ three main folders ([**Multi-Sheet Songs**](Multi-Sheet%20Songs), [**Songs**](So
 > compared to them.
 
 <details open>
-<summary><b>Table of Contents</b></summary>
+<summary><b>📋 Table of Contents</b></summary>
 
 ---
 

@@ -1,5 +1,3 @@
-
-
 <!-- LTeX: language=es-ES -->
 
 <div align="center">
@@ -8,25 +6,26 @@
 
 # [Sky1984 Sheets Collection](https://api.github.com/repos/Ai-Vonie/Sky1984-Sheets-Collection)
 
-🌍 Leer en: **⮞⮞ Español (es-ES) ⮜⮜** _∙ [Русский (ru-RU)](README_ru-RU.md)_
+🌍 Leer en: _[English (en-US)](README.md) ∙_ **⮞⮞ Español (es-ES) ⮜⮜** _∙
+[Русский (ru-RU)](README_ru-RU.md)_
 
 </div>
 
-**Sky1984 Sheets Collection** es una extensa biblioteca de partituras musicales recopiladas para simplificar la
-búsqueda de composiciones específicas en un solo lugar. Estas partituras están diseñadas para tocarse en los instrumentos dentro del
-juego **Sky: Children of the Light** y para su uso en el
-_[Sky Music Nightly](https://sky-music-nightly.pages.dev/)_ sitio. Las partituras musicales se encuentran en
-tres carpetas principales ([**Multi-Sheet Songs**](Multi-Sheet%20Songs), [**Songs**](Songs) y
-[**VSRG**](VSRG)), donde están ordenadas alfabéticamente.
+**Sky1984 Sheets Collection** es una extensa biblioteca de partituras musicales recopiladas para
+simplificar la búsqueda de composiciones específicas en un solo lugar. Estas partituras están
+diseñadas para tocarse en los instrumentos dentro del juego **Sky: Children of the Light** y para su
+uso en el sitio web _[Sky Music Nightly](https://sky-music-nightly.pages.dev/)_. Las partituras
+musicales se encuentran en tres carpetas principales ([**Multi-Sheet Songs**](Multi-Sheet%20Songs),
+[**Songs**](Songs) y [**VSRG**](VSRG)), donde están ordenadas alfabéticamente.
 
 > [!WARNING]
 >
 > ⚠️ **¡Atención!** Esta colección no está completa ni es definitiva. Se recomienda consultar otras
-> fuentes y bibliotecas para obtener actualizaciones, ya que el contenido de este repositorio podría estar desactualizado o ser irrelevante
-> en comparación con ellas.
+> fuentes y bibliotecas para obtener actualizaciones, ya que el contenido de este repositorio podría
+> estar desactualizado o ser irrelevante en comparación con ellas.
 
 <details open>
-<summary><b>Tabla de contenidos</b></summary>
+<summary><b>📋 Tabla de contenidos</b></summary>
 
 ---
 
@@ -53,9 +52,10 @@ tres carpetas principales ([**Multi-Sheet Songs**](Multi-Sheet%20Songs), [**Song
 
 Para una búsqueda efectiva de la composición deseada, intenta seguir estas recomendaciones:
 
-- **Usa palabras clave principales:** Ingresa solo las palabras clave o la parte significativa del título de la canción, y también intenta
-  buscar por separado el apodo del autor.
-- **Evita el desorden:** Excluye **palabras vacías** (artículos, conjunciones, preposiciones) y símbolos específicos de tu consulta.
+- **Usa palabras clave:** Ingresa solo las palabras clave o la parte significativa del título de la
+  canción, y también intenta buscar por separado el apodo del autor.
+- **Evita el desorden:** Excluye **palabras vacías** (artículos, conjunciones, preposiciones) y
+  símbolos específicos de tu consulta.
 - **Buscar en una carpeta específica:** usa la sintaxis especial
   [**`path:/^Songs\//`**](https://github.com/search?q=repo%3AAi-Vonie%2FSky1984-Sheets-Collection%20path%3A%2F%5ESongs%5C%2F%2F%20&type=code)
   al principio de tu consulta de búsqueda para limitar la búsqueda a una carpeta específica.
@@ -63,14 +63,16 @@ Para una búsqueda efectiva de la composición deseada, intenta seguir estas rec
 La búsqueda del repositorio funciona en dos modos:
 
 1. **[Por nombre de archivo](https://docs.github.com/search-github/searching-on-github/finding-files-on-github)**
-   — presiona `t` o haz clic en el botón **`Go to file`** para iniciar la búsqueda en el menú de salto rápido a archivos.
+   — presiona `t` o haz clic en el botón **`Go to file`** para iniciar la búsqueda en el menú de
+   salto rápido a archivos.
 2. **[Por contenido de archivo](https://docs.github.com/search-github/github-code-search/using-github-code-search)**
    — presiona `/` o haz clic en el campo de búsqueda encima de **`Type / to search`** para activar
    [búsqueda global de código en este repositorio](https://github.com/search?q=repo%3AAi-Vonie%2FSky1984-Sheets-Collection%20&type=code).
 
 > [!IMPORTANT]
 >
-> ‼️ **Importante:** Para utilizar la búsqueda de código (contenido de archivos), debes **iniciar sesión en tu cuenta de GitHub**.
+> ‼️ **Importante:** Para utilizar la búsqueda de código (contenido de archivos), debes **iniciar
+> sesión en tu cuenta de GitHub**.
 
 Se recomienda leer la documentación sobre
 [limitaciones de la búsqueda de código](https://docs.github.com/search-github/github-code-search/about-github-code-search#limitations)
@@ -86,9 +88,12 @@ Puedes descargar archivos individuales, carpetas específicas o todo el reposito
 
 Ve a la página del archivo deseado y elige un método conveniente:
 
-- **Descargar archivo:** Haz clic en el ícono **`Download raw file`** en la esquina superior derecha encima del código del archivo.
-- **Copiar contenido:** Haz clic en el ícono **`Copy raw file`** para copiar el texto al portapapeles.
-- **Vía Raw:** Haz clic en el botón **`Raw`**, luego presiona `Ctrl + S` (Windows) o `Cmd + S` (macOS) para guardar el archivo.
+- **Descargar archivo:** Haz clic en el ícono **`Download raw file`** en la esquina superior derecha
+  encima del código del archivo.
+- **Copiar contenido:** Haz clic en el ícono **`Copy raw file`** para copiar el texto al
+  portapapeles.
+- **Vía Raw:** Haz clic en el botón **`Raw`**, luego presiona `Ctrl + S` (Windows) o `Cmd + S`
+  (macOS) para guardar el archivo.
 
 ### 2. Descargar una carpeta específica
 
@@ -99,7 +104,8 @@ GitHub no permite descargar carpetas individuales de forma predeterminada. Usa
 2. Copia el enlace (URL) de la barra de direcciones del navegador.
 3. Ve a [download-directory.github.io](https://download-directory.github.io/)
    (`https://download-directory.github.io/`).
-4. Pega el enlace en el campo de entrada y presiona `Enter`. La carpeta se descargará como un archivo ZIP.
+4. Pega el enlace en el campo de entrada y presiona `Enter`. La carpeta se descargará como un
+   archivo ZIP.
 
 ### 3. Descargar todo el repositorio
 
@@ -114,11 +120,12 @@ Para obtener una copia local completa de la biblioteca:
 ### 4. Descargar archivos desde las versiones (releases)
 
 También puedes descargar una carpeta específica o todo el repositorio como un archivo en la
-[última versión publicada](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/releases/latest) desde
-la pestaña [**Releases**](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/releases).
+[última versión publicada](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/releases/latest)
+desde la pestaña [**Releases**](https://github.com/Ai-Vonie/Sky1984-Sheets-Collection/releases).
 
-> Los archivos en las versiones utilizan un algoritmo de compresión especializado con configuraciones optimizadas para la
-> estructura de estos archivos para garantizar el tamaño más pequeño posible.
+> Los archivos en las versiones utilizan un algoritmo de compresión especializado con
+> configuraciones optimizadas para la estructura de estos archivos para garantizar el tamaño más
+> pequeño posible.
 
 ## 🎹 Convertidor de MIDI a partitura de Sky&nbsp;[![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1Kia0VrRyctLVs1q0lYKJVnGpW45U7_EQ?usp=sharing)
 
@@ -132,13 +139,14 @@ https://colab.research.google.com/drive/1Kia0VrRyctLVs1q0lYKJVnGpW45U7_EQ?usp=sh
 
 > [!WARNING]
 >
-> ⚠️ **¡Advertencia!** Esta herramienta de trasposición MIDI opera con un algoritmo simplificado y no
-> utiliza ninguna biblioteca avanzada de terceros para análisis musical profundo. Se recomienda usar
-> otras herramientas especializadas de trasposición MIDI, ya que este convertidor puede ser imperfecto o menos funcional
-> en comparación con alternativas profesionales.
+> ⚠️ **¡Advertencia!** Esta herramienta de trasposición MIDI opera con un algoritmo simplificado y
+> no utiliza ninguna biblioteca avanzada de terceros para análisis musical profundo. Se recomienda
+> usar otras herramientas especializadas de trasposición MIDI, ya que este convertidor puede ser
+> imperfecto o menos funcional en comparación con alternativas profesionales.
 
-Puedes encontrar ejemplos de conversiones decentes realizadas con este script en el
-servidor de Discord **[SkyAutoMusic](https://discord.gg/wzjWKyJtmk)** (**`https://discord.gg/wzjWKyJtmk`**) mediante los enlaces a continuación:
+Puedes encontrar ejemplos de conversiones decentes realizadas con este script en el servidor de
+Discord **[SkyAutoMusic](https://discord.gg/wzjWKyJtmk)** (**`https://discord.gg/wzjWKyJtmk`**)
+mediante los enlaces a continuación:
 
 <details open>
 <summary><b>👀 Tabla de ejemplos de conversión</b></summary>
@@ -147,7 +155,7 @@ servidor de Discord **[SkyAutoMusic](https://discord.gg/wzjWKyJtmk)** (**`https:
 
 <!-- LTeX: enabled=false -->
 
-| Composition                                                                                                           |                Link to file                |    Download file    |
+| Composición                                                                                                           |             Enlace al archivo              |  Descargar archivo  |
 | :-------------------------------------------------------------------------------------------------------------------- | :----------------------------------------: | :-----------------: |
 | [🎹][ms_01] [_My Dearest - supercell Guilty Crown OP1 + Animenz's 10th Anniversary_][yt_01]                           | [💬 Discord][msg_01]<br>[🐱 GitHub][gh_01] | [💾 Discord][dl_01] |
 | [🎹][ms_02] [_Oppenheimer Can You Hear the Music - Music by Ludwig Göransson Arrangement by Akmigone_][yt_02]         | [💬 Discord][msg_02]<br>[🐱 GitHub][gh_02] | [💾 Discord][dl_02] |
@@ -331,8 +339,8 @@ servidor de Discord **[SkyAutoMusic](https://discord.gg/wzjWKyJtmk)** (**`https:
 
 > [!NOTE]
 >
-> ℹ️ **Nota:** Se pueden encontrar otros ejemplos de conversión en el historial del canal revisando mensajes
-> cerca de los enlaces proporcionados arriba (alrededor de las mismas fechas).
+> ℹ️ **Nota:** Se pueden encontrar otros ejemplos de conversión en el historial del canal revisando
+> mensajes cerca de los enlaces proporcionados arriba (alrededor de las mismas fechas).
 
 ### 📝 Recomendaciones de uso
 
@@ -342,24 +350,28 @@ Para obtener los mejores resultados, sigue estos pasos recomendados:
    opción más sencilla es revisar el repositorio
    **[dl-librescore](https://github.com/LibreScore/dl-librescore)** para el sitio
    **[MuseScore](https://musescore.com/)**.
-1. **Selección de la fuente:** Usa archivos MIDI con una estructura clara (por ejemplo, versiones de _Solo de Piano_); evita
-   archivos orquestales con docenas de pistas.
-2. **Nombrado de archivos:** Antes de convertir, renombra el archivo MIDI con el título como quieres que aparezca la canción.
+1. **Selección de la fuente:** Usa archivos MIDI con una estructura clara (por ejemplo, versiones de
+   _Solo de Piano_); evita archivos orquestales con docenas de pistas.
+2. **Nombrado de archivos:** Antes de convertir, renombra el archivo MIDI con el título como quieres
+   que aparezca la canción.
    - El script usa el nombre del archivo para completar el campo interno `"name"` de la partitura.
-   - Se recomienda eliminar partes innecesarias del nombre del archivo (por ejemplo, _[Solo de Piano]_,
-     _«Synthesia»_, etc.) de antemano. Si se te olvida hacerlo, puedes editar manualmente el campo `"name"`
-     dentro del archivo JSON más tarde.
-3. **Verificación de resultados:** Para escuchar y verificar la partitura resultante, usa el **_Compositor_** en
-   el sitio _[Sky Music Nightly](https://sky-music.specy.app/composer)_, ya que la herramienta genera partituras JSON
-   específicamente válidas para este sitio.
-4. **Edición y pulido:** En la configuración del _Compositor_, perfecciona la partitura hasta la _perfección_:
-   - Ajusta el **Afinación (Pitch)** y/o cambia el **Instrumento**.
-   - Para un sonido más atmosférico, habilita el eco ajustando el parámetro **Reverberación base (Base Reverb)**.
-   - Corrige manualmente áreas "defectuosas" como **glisandos** y **arpegios**. Es mejor
-     trasponer, delgacear o redibujar estos momentos manualmente.
-5. **Corrección de velocidad:** Si el modo automático (`Auto_Scroll`) seleccionó un multiplicador de BPM incorrecto
-   y la duración total difiere de la original en 10–20 segundos o más, intenta regenerar el
-   archivo con `Auto_Scroll` desactivado y selecciona el valor manualmente a través del parámetro `Manual_Multiplier`.
+   - Se recomienda eliminar partes innecesarias del nombre del archivo (por ejemplo, _[Solo de
+     Piano]_, _«Synthesia»_, etc.) de antemano. Si se te olvida hacerlo, puedes editar manualmente
+     el campo `"name"` dentro del archivo JSON más tarde.
+3. **Verificación de resultados:** Para escuchar y verificar la partitura resultante, usa el
+   **_Compositor_** en el sitio _[Sky Music Nightly](https://sky-music.specy.app/composer)_, ya que
+   la herramienta genera partituras JSON específicamente válidas para este sitio.
+4. **Edición y pulido:** En la configuración del _Compositor_, perfecciona la partitura hasta la
+   _perfección_:
+   - Ajusta **la afinación (Pitch)** y/o cambia el **Instrumento**.
+   - Para un sonido más atmosférico, habilita el eco ajustando el parámetro **Reverberación base
+     (Base Reverb)**.
+   - Corrige manualmente áreas "defectuosas" como **glisandos** y **arpegios**. Es mejor trasponer,
+     delgacear o redibujar estos momentos manualmente.
+5. **Corrección de velocidad:** Si el modo automático (`Auto_Scroll`) seleccionó un multiplicador de
+   BPM incorrecto y la duración total difiere de la original en 10–20 segundos o más, intenta
+   regenerar el archivo con `Auto_Scroll` desactivado y selecciona el valor manualmente a través del
+   parámetro `Manual_Multiplier`.
 
 > [!NOTE]
 >
@@ -370,9 +382,9 @@ Para obtener los mejores resultados, sigue estos pasos recomendados:
 
 > [!TIP]
 >
-> **📢 ¡Comparte el resultado!** No olvides compartir el archivo de partitura convertido con otros en el
-> servidor de Discord **[SkyAutoMusic](https://discord.gg/wzjWKyJtmk)** (**`https://discord.gg/wzjWKyJtmk`**) en el
-> canal
+> **📢 ¡Comparte el resultado!** No olvides compartir el archivo de partitura convertido con otros
+> en el servidor de Discord **[SkyAutoMusic](https://discord.gg/wzjWKyJtmk)**
+> (**`https://discord.gg/wzjWKyJtmk`**) en el canal
 > [**🎹 music / 🎶share-songs**](https://discord.com/channels/735827593710010369/798936282449182741).
 
 <p align="right">
@@ -386,30 +398,33 @@ Para obtener los mejores resultados, sigue estos pasos recomendados:
 La idea de crear esta colección surgió hace dos años, pero en ese momento me cambié a otros juegos,
 donde también continué mi camino como bardo musical.
 
-Cuando tuve algo de tiempo libre en FF XIV, decidí simplemente hacerlo, porque las alternativas existentes y
-otras opciones de bibliotecas no me satisfacían con su implementación o enfoque organizativo para
-usar estas partituras en otros juegos. El repositorio en sí se ensambló en un par de noches.
+Cuando tuve algo de tiempo libre en FF XIV, decidí simplemente hacerlo, porque las alternativas
+existentes y otras opciones de bibliotecas no me satisfacían con su implementación o enfoque
+organizativo para usar estas partituras en otros juegos. El repositorio en sí se ensambló en un par
+de noches.
 
 ## ⚙️ Detalles técnicos
 
-Inicialmente, se recopilaron ±59.457 archivos. La colección final es el resultado donde se eliminaron los
-duplicados, y se conservaron los archivos con el contenido interno y nombre de archivo más "de calidad".
+Inicialmente, se recopilaron ±59.457 archivos. La colección final es el resultado donde se
+eliminaron los duplicados, y se conservaron los archivos con el contenido interno y nombre de
+archivo más "de calidad".
 
 Se utilizó un algoritmo personalizado para filtrar duplicados con la siguiente lógica:
 
 1. **Duplicados exactos:** Comparación por hash SHA-256 del archivo.
 2. **Duplicados estructurales:** Análisis del contenido de los metadatos JSON.
-3. **Variantes de capa exactas:** Comparación de firmas exactas de notas para identificar variaciones de clave diferentes
-   de la misma partitura.
-4. **Variantes de capa difusas:** Comparación de firmas de notas para identificar variaciones de clave diferentes con
-   ligeras desviaciones (con un umbral de similitud de ~97%).
-5. **Coincidencia de contenido difusa:** Comparación de secuencias completas de notas dentro del mismo grupo de BPM para
-   identificar arreglos similares (con un umbral de similitud de ~80%).
+3. **Variantes de capa exactas:** Comparación de firmas exactas de notas para identificar
+   variaciones de clave diferentes de la misma partitura.
+4. **Variantes de capa difusas:** Comparación de firmas de notas para identificar variaciones de
+   clave diferentes con ligeras desviaciones (con un umbral de similitud de ~97%).
+5. **Coincidencia de contenido difusa:** Comparación de secuencias completas de notas dentro del
+   mismo grupo de BPM para identificar arreglos similares (con un umbral de similitud de ~80%).
 
 > [!NOTE]
 >
-> ℹ️ **Nota:** Se permitió la inclusión de algunos archivos en el repositorio si se encontraron variaciones de canciones
-> (por ejemplo, _Fácil/Difícil_, _V1/V2_, _Partituras múltiples/Solo_ y otras opciones posibles).
+> ℹ️ **Nota:** Se permitió la inclusión de algunos archivos en el repositorio si se encontraron
+> variaciones de canciones (por ejemplo, _Fácil/Difícil_, _V1/V2_, _Partituras múltiples/Solo_ y
+> otras opciones posibles).
 
 ## ⚖️ Aspectos legales y derechos de autor
 
@@ -420,14 +435,15 @@ El código, scripts y herramientas creadas para este repositorio están licencia
 
 ### Colección de partituras
 
-La curación de la colección y los formatos de archivos convertidos (JSON/TXT) se dedican al dominio público
-bajo [**The Unlicense**](LICENSE).
+La curación de la colección y los formatos de archivos convertidos (JSON/TXT) se dedican al dominio
+público bajo [**The Unlicense**](LICENSE).
 
-El propietario del repositorio **renuncia a todos los derechos** sobre la compilación en sí. Sin embargo, tenga en cuenta:
+El propietario del repositorio **renuncia a todos los derechos** sobre la compilación en sí. Sin
+embargo, tenga en cuenta:
 
-- **Composiciones originales:** Todos los derechos pertenecen a sus respectivos compositores, editores y
-  titulares de derechos de autor.
-- **Transcripciones:** Los derechos de los arreglos musicales específicos pertenecen a los autores originales que
-  crearon los archivos MIDI/Partituras.
+- **Composiciones originales:** Todos los derechos pertenecen a sus respectivos compositores,
+  editores y titulares de derechos de autor.
+- **Transcripciones:** Los derechos de los arreglos musicales específicos pertenecen a los autores
+  originales que crearon los archivos MIDI/Partituras.
 
-Esta colección se proporciona estrictamente con fines **archivales**.
+Esta colección se proporciona estrictamente con fines **de archivo**.
